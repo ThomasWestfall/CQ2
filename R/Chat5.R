@@ -1,7 +1,6 @@
-Chat5 <- function(params, flow, flow.s,flow.date) {
+Chat5 <- function(params, flow, flow.s,flow.date) { #quick-slow CQ of Minaudo et al. (2019)
 
-
-  # calc fast-flow
+  # calc quick-flow
   flow.q <- flow - flow.s
 
   if(NCOL(params)>1){
@@ -12,6 +11,8 @@ Chat5 <- function(params, flow, flow.s,flow.date) {
 
     Pred <- sweep(sweep(flow.s,MARGIN=2,bs,`^`),MARGIN = 2, a,`*`) * ifelse(flow.q>0,sweep(flow.q,MARGIN=2, bf,`^`),1)
 
+    # Note: default quick-flow term to 1 if flow.q = 0 else 0^-bq is undefined
+
   }else{
 
     a <- 10^params[1]
@@ -20,6 +21,8 @@ Chat5 <- function(params, flow, flow.s,flow.date) {
 
 
     Pred <- a * flow.s^bs * ifelse(flow.q>0,flow.q^bf,1)
+
+    # Note: default quick-flow term to 1 if flow.q = 0 else 0^-bq is undefined
 
 
   }

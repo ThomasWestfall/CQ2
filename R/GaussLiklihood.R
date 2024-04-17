@@ -1,5 +1,6 @@
 GaussLiklihood <- function(params, conc, Pred, conc.date){
 
+  #conc.date is a matrix with two columns, each row is an index of the start and end of a continuous concentration periods
 
   if(length(params) >1){
     sig <- params/10
@@ -7,7 +8,8 @@ GaussLiklihood <- function(params, conc, Pred, conc.date){
     sig <- params/10
   }
 
-  #re-compute conc.date, if observed days are less than p+2 (2), then remove
+  # Only run if more than three days of observations (can be removed since not assuming auto-correlation)
+  # re-compute conc.date, if observed days are less than p+2 (2), then remove
   if(any(conc.date[,2] - conc.date[,1] < 3)){
     conc.date <- conc.date[-which(conc.date[,2] - conc.date[,1] < 3),]
   }
@@ -43,8 +45,11 @@ GaussLiklihood <- function(params, conc, Pred, conc.date){
 
   }
 
+  # if any negLL are NA, then set to infinity, remember we are minimizing the negative log-likelihood
+  # so the optimizer will steer away from results giving positive infinity
   negLL[is.na(negLL)] = Inf
 
+  # output message if this is the case..
   if(any(negLL == Inf)){
     message(paste(sum(!is.finite(negLL)),"negLL == Inf"))
   }

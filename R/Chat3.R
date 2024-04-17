@@ -1,9 +1,12 @@
-Chat3 <- function(params, flow, flow.s, flow.date) { #C ~ Qs, Qf Gunnerson
+Chat3 <- function(params, flow, flow.s, flow.date) { #quick-slow CQ of Gunnerson (1967)
 
-  # calc fast-flow
+  #flow.s is baseflow (from BhatEck) either as is or in matrix form with duplicates in each column
+
+  # calc quick-flow
   flow.q <- flow - flow.s
 
   if(NCOL(params)>1){
+
     # initiate parameters
     as <- 10^params[1,]
     bs <- params[2,]
@@ -13,8 +16,7 @@ Chat3 <- function(params, flow, flow.s, flow.date) { #C ~ Qs, Qf Gunnerson
     Pred <- sweep(sweep(flow.s, MARGIN=2,bs, `^`), MARGIN=2,as,`*`) +
       ifelse(flow.q>0,sweep(sweep(flow.q, MARGIN=2,bq, `^`), MARGIN=2,aq,`*`),0)
 
-    # Pred <- sweep(ifelse(flow.s ==0,1,sweep(flow.s, MARGIN=2,bs, `^`)), MARGIN=2,as,`*`) +
-    #   ifelse(flow.q>0,sweep(sweep(flow.q, MARGIN=2,bq, `^`), MARGIN=2,aq,`*`),0)
+    # Note: default quick-flow term to zero if flow.q = 0 else 0^-bq is undefined
 
   }else{
     as <- 10^params[1]
@@ -23,8 +25,9 @@ Chat3 <- function(params, flow, flow.s, flow.date) { #C ~ Qs, Qf Gunnerson
     bq <- params[4]
 
     Pred <- (as)*(flow.s)^bs + ifelse(flow.q>0, (aq)*(flow.q)^bq, 0)
-    # Pred <- as * ifelse(flow.s == 0, 1,flow.s^bs) + ifelse(flow.q>0, aq*flow.q^bq, 0)
-    #
+
+    # Note: default quick-flow term to zero if flow.q = 0 else 0^-bq is undefined
+
   }
 
   return(Pred)

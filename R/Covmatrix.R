@@ -1,4 +1,4 @@
-Covmatrix <- function(p,rho){
+Covmatrix <- function(p,rho){ # this is only used for AR1 and AR3 likelihood
 
   Vp = matrix(NA,p,p)
   if(p > 1){
@@ -22,7 +22,7 @@ Covmatrix <- function(p,rho){
     # since matrix is symmetrical, populate lower portion with values
     Vp[lower.tri(Vp)] = t(Vp)[lower.tri(Vp)]
 
-  } else {
+  } else { # if AR1, just do this... 1-rho^2
     Vp[p] = (1-rho[p]^2)
   }
 

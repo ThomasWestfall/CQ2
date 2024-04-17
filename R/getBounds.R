@@ -1,5 +1,8 @@
 getBounds <- function(Chat.model.name, Bhat.model.name, Likelihood.name){
 
+  # This function gets bounds (upper and lower) and start value for CMAES
+  # based on selection of models...
+
   boundsList1 <- sapply("lower", function(x) vector(mode ='list'))
   boundsList2 <- sapply("upper", function(x) vector(mode ='list'))
   startsList <- sapply("start.value", function(x) vector(mode ='list'))

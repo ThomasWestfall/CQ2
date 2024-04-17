@@ -1,16 +1,13 @@
-Chat7 <- function(params, flow, flow.s, flow.date) {
+Chat7 <- function(params, flow, flow.s, flow.date) { #quick-slow CQ variant,
+  #source load varies as slow flow varies with hysteresis term
 
-
-  # calc fast-flow
+  # calc quick-flow
   flow.q <- flow - flow.s
-
-  #calc groundwater end member
-  # Cs <- max(conc[which(flow> 0)], na.rm = TRUE)
 
   if(NCOL(params)>1){
 
     b <- params[1,]
-    Cs <-  10^params[2,]#rep(Cs,ncol(params))
+    Cs <-  10^params[2,]
     c <- params[3,]^5
 
     #three point difference dQf/dt = (Qf+t - Qf-t)/(2*t) where t = 1
@@ -34,8 +31,10 @@ Chat7 <- function(params, flow, flow.s, flow.date) {
     Cs <-  10^params[2]
     c <- params[3]^5
 
+    #three point difference dQf/dt = (Qf+t - Qf-t)/(2*t) where t = 1
     flow.d <- flow
     flow.d[2:(length(flow)-1)] <- (flow[3:length(flow)] - flow[1:(length(flow)-2)])/(2*1)
+
     # forward and backward difference
     flow.d[1] <- (flow[2] -flow[1])/1
     flow.d[length(flow)] <- (flow[length(flow)] - flow[(length(flow)-1)])/1

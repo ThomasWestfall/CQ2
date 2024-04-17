@@ -1,13 +1,14 @@
-Chat6 <- function(params, flow, flow.s, flow.date) {
+Chat6 <- function(params, flow, flow.s, flow.date) { #quick-slow CQ variant,
+  #source load varies as slow flow varies
 
 
-  # calc fast-flow
+  # calc quick-flow
   flow.q <- flow - flow.s
 
   if(NCOL(params)>1){
 
     b <- params[1,]
-    Cs <-  10^params[2,]#rep(Cs,ncol(params))
+    Cs <-  10^params[2,] #Cs is the objectivly calibrated
 
     Pred <- sweep(flow.s,MARGIN = 2, Cs,'*')*sweep(flow,MARGIN=2,b,`^`)
 
