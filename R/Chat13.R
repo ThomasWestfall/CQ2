@@ -5,7 +5,7 @@ Chat13 <- function(params, flow, flow.s, conc, flow.date) { #Johnson 1969, with 
   if(NCOL(params)>1){
     Bs <- 1/(params[1,]/10)
 
-    Bq <- 10^params[3,] #gdg
+    Bq <- 10^params[3,]
     L0 <- 10^params[4,]
     Cs <- 10^params[5,]
     CqBq <- 10^params[6,]
