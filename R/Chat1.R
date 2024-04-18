@@ -1,3 +1,14 @@
+#' \code{Chat1} simple CQ model
+#'
+#' This is a model function. It predicts in-stream concentration.
+#'
+#' @return
+#' A vector of concentration predictions for each time-step
+#'
+#' @keywords model
+#'
+#' @export
+
 Chat1 <- function(params, flow) { # # power law between C ~ Q
   #flow = observed stream flow data either as is or in matrix form as duplicates in each column
 
