@@ -1,5 +1,8 @@
 GaussLiklihoodBV1 <- function(params, conc, Pred, conc.date){
 
+  # AR1 Gauss Log-Likelihood from likelihood function (B7.1.6, pg. 277) in Rainfall-Runoff modelling: the primer by Keith Beven (2012)
+  # should be identical results to "GaussLiklihoodAR1"
+
   if(NCOL(params) >1){
     rho <- params[1,]/10
     sig <- params[2,]
@@ -16,23 +19,13 @@ GaussLiklihoodBV1 <- function(params, conc, Pred, conc.date){
   # get error vector for only finite values
   error <- log(conc) - log(Pred)
 
-  ### Scenario 2 - varying mean bias
-  # if we want mu_e to vary, assume error from first "missing" timesteps of continous period= mu_e
-  # error[conc.date[2:NROW(conc.date),1]-1,] = matrix(mu_e, NROW(conc.date)-1, NCOL(Pred), byrow = TRUE)
-
-  # initiate empty vectors for only finite values
-  # inside <- matrix(NA, NROW(conc), NCOL(Pred))
-
-  ### Scenario 1 - mean bias equals zero
-  # assume mean error is constant at zero
+  # assume mean error bias is constant at zero
   mu_e = rep(0, NCOL(Pred))
 
 
   # Calculate the correlation of the error from previous time step
   if (NCOL(params)>1) {
-    # inside_list <- vector(mode = 'list', length = NROW(conc.date))
     inside_list <- sapply(1:NROW(conc.date), function(i) (sweep(error[(conc.date[i,1]+1):(conc.date[i,2]),], MARGIN = 2, mu_e,'-') - sweep(sweep(error[conc.date[i,1]:(conc.date[i,2]-1),], MARGIN = 2, mu_e, '-'),MARGIN = 2, rho,'*')))
-    # inside[2:NROW(inside),] <- sweep(error[2:NROW(inside),],MARGIN = 2,mu_e,'-') - sweep(sweep(error[1:(NROW(inside)-1),],MARGIN = 2,mu_e,'-'),MARGIN = 2,rho,'*')
   }else{
     inside_list <- sapply(1:NROW(conc.date), function(i) error[(conc.date[i,1]+1):(conc.date[i,2])] - mu_e - rho*(error[conc.date[i,1]:(conc.date[i,2]-1)] - mu_e))
   }
@@ -69,11 +62,6 @@ GaussLiklihoodBV1 <- function(params, conc, Pred, conc.date){
     negLL <- sum(negLL)
   }
 
-  # GaussLiklihood without mu_e or rho
-  # L <- (-ind_sum/2)*log(2*pi*((sig)^2))+(-1/(2*(sig)^2)*(error.sum))
-
-  #
-  #
 
   negLL[is.na(negLL)] = Inf
 
