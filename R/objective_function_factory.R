@@ -20,9 +20,6 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
 
     parlen <- nrow(params)
 
-    # initial matrix of 'baseflow' uses existing flow in order to capture NA gaps in data
-    # xs = matrix(x, length(x), NCOL(params))
-
     # # # export parameters 1 and 2 into a 6 list for each core, keep them in a column
     splt = rep(1:length(cl), each = ceiling(ncol(params)/length(cl)), length.out = ncol(params))
     newgrid = lapply(as.list(1:length(cl)), function(w) (params[1:parlen, splt == w]))
@@ -203,7 +200,7 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
 
   }
 
-  # Check to make sure Cs > Cq in Chat 13 ... if not, return Infinite negLL
+  # Check to make sure Cs > Cq in Chat 8 and Chat 9 ... if not, return Infinite negLL
   if(noquote(Chat.model.names) %in% c("Chat8","Chat9")){
     if (NCOL(params)>1) {
 
@@ -214,7 +211,7 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
     }
   }
 
-  # Check to make sure Cs > Cq in Chat 13 ... if not, return Infinite negLL
+  # Check to make sure Cs > Cq in Chat 10 and Chat11 ... if not, return Infinite negLL
   if(noquote(Chat.model.names) %in% c("Chat10","Chat11")){
     if (NCOL(params)>1) {
 
@@ -254,7 +251,7 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
 
     # force(params)
 
-    negLL.rerun <- objective_function(params)#objective_function_factory(flow, conc, flow.date, conc.date, dec.time, cl, Chat.model.names, Bhat.model.name, Likelihood.name)
+    negLL.rerun <- objective_function(params)
 
     # if(isFALSE(all.equal(negLL[27],negLL.rerun))){
     if(isFALSE(negLL[27] == negLL.rerun)){
