@@ -2,14 +2,28 @@
 % Please edit documentation in R/Chat1.R
 \name{Chat1}
 \alias{Chat1}
-\title{\code{Chat1} simple CQ model}
+\title{Runs simple C-Q model}
 \usage{
 Chat1(params, flow)
 }
+\arguments{
+\item{params}{are two values for setting parameters $a$ and $b$. The parameters can be a single value or a vector. The calibration procedure runs the model in vector form, calling Chat1 with a vector of guesses for each parameter. The bounds and initial guess are set using \code{getBounds}
+Note: $a = 10^params[1]$ and $b = params[2]$}
+
+\item{flow}{streamflow dataframe. Vector or array with duplicates in each column for model calibration}
+}
 \value{
-A vector of concentration predictions for each time-step
+A $Pred$ data frame with predicted concentrations for each time-step. If called in calibration mode, array returned with predictions in each column.
 }
 \description{
-This is a model function. It predicts in-stream concentration.
+\code{Chat1} get simple CQ model
 }
-\keyword{model}
+\details{
+Chat1 runs the simple CQ model: $C=aQ\^b$. This predicts in-stream concentration $C$ based on observed streamflow $Q$ data.
+
+
+The input requires observed streamflow data on a daily timescale and two parameters, $a$ and $b$.
+}
+\keyword{C-Q}
+\keyword{Chat1}
+\keyword{simple}
