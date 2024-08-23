@@ -1,8 +1,10 @@
 # This R scrpt details the step required to build the CRAN .tar.gz file for submission to CRAN and how to build the manual PDF.
 #------------------------------------------------
-
-# RE-write NAMESPACE
+# library(roxygen2)
+# # RE-write NAMESPACE
+# roxygenize(package.dir = "CQ2")
 roxygen2::roxygenise()
+roxygen2::roxygenise("C:/Users/twes0006/OneDrive - Monash University/Git/CQ2")
 
 # Build PDF. If CQ2.pdf already exists, then delete before running.
 path <- "C:/Users/twes0006/OneDrive - Monash University/Git/CQ2"  # Note could also use: find.package("CQ2")

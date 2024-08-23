@@ -1,4 +1,4 @@
-RunCMAES <- function(sigma.cmaes, lamda.cmaes, Nrestarts, restart.multi, objective_function, Chat.model.names, bounds){
+RunCMAES <- function(sigma.cmaes, lamda.cmaes, Nrestart, restart.multi, objective_function, Chat.model.names, bounds){
 
   ## Description of myStopOnTolx... changed from cmaesr package, because cmaesr "tol" only accepts integers... shared by Lucas Pamminger ##
   myStopOnTolX = function(tol = 1e-12) {

@@ -147,7 +147,7 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
     }else if(noquote(Likelihood.name) == "GaussLiklihoodAR3"){
       parallel::clusterExport(cl,c("conc","Pred",noquote(Likelihood.name),"Covmatrix","newgrid","conc.date"),envir = environment())
       #get neg log liklihood
-      negLL <- parallel::parLapply(cl, 1:length(cl), function(v) match.fun(Likelihood.name)(params = newgrid[[v]][(parlen-2):parlen,], matrix(conc, NROW(conc), ncol= sims_perCore[v]), matrix(unlist(Pred[v]), ncol = sims_perCore[v]),conc.date))
+      negLL <- parallel::parLapply(cl, 1:length(cl), function(v) match.fun(Likelihood.name)(params = newgrid[[v]][(parlen-3):parlen,], matrix(conc, NROW(conc), ncol= sims_perCore[v]), matrix(unlist(Pred[v]), ncol = sims_perCore[v]),conc.date))
       negLL <- matrix(unlist(negLL), ncol = ncol(params))
     }
 
@@ -167,7 +167,7 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
 
     }else if(noquote(Likelihood.name) == "GaussLiklihoodAR3"){
       #get neg log liklihood
-      negLL <- match.fun(Likelihood.name)(params = params[(parlen-2):parlen,], conc, Pred,conc.date)
+      negLL <- match.fun(Likelihood.name)(params = params[(parlen-3):parlen,], conc, Pred,conc.date)
     }
   }
 

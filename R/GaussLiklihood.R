@@ -8,10 +8,9 @@ GaussLiklihood <- function(params, conc, Pred, conc.date){
     sig <- params/10
   }
 
-  # Only run if more than three days of observations (can be removed since not assuming auto-correlation)
-  # re-compute conc.date, if observed days are less than p+2 (2), then remove
-  if(any(conc.date[,2] - conc.date[,1] < 3)){
-    conc.date <- conc.date[-which(conc.date[,2] - conc.date[,1] < 3),]
+  #re-compute conc.date, if observed days are less than (1), then remove
+  if(any(conc.date[,2] - conc.date[,1] < 1)){
+    conc.date <- conc.date[-which(conc.date[,2] - conc.date[,1] < 1),]
   }
 
   error <- log(conc) - log(Pred)

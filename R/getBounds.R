@@ -30,9 +30,9 @@ getBounds <- function(Chat.model.name, Bhat.model.name, Likelihood.name){
   }
 
   if(Chat.model.name == "Chat1" & Likelihood.name == "GaussLiklihoodAR3"){
-    boundsList[[1]]$start.value = c(1515,-.2,9,9,1e-6,.1)
-    boundsList[[1]]$lower = c(1510,-5,1e-7,1e-7,1e-7,1e-7)
-    boundsList[[1]]$upper = c(1520,5,10,10,1e-5,5)
+    boundsList[[1]]$start.value = c(2,-.2,1,2,1,.1)
+    boundsList[[1]]$lower = c(-5,-5,1e-7,1e-7,1e-7,1e-7)
+    boundsList[[1]]$upper = c(5,5,10,10,10,5)
   }
 
   # with seasonal terms...
@@ -207,6 +207,12 @@ getBounds <- function(Chat.model.name, Bhat.model.name, Likelihood.name){
     boundsList[[1]]$start.value = c(9,8,-0.3,1,1,1,1,9,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-6,-5,-5,-5,-5,-5,1e-7,1e-6)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,5,5,9.9999,10)
+  }
+
+  if(Chat.model.name == "Chat13" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR3"){
+    boundsList[[1]]$start.value = c(9,8,-0.3,1,1,1,1,9,9,9,0.5)
+    boundsList[[1]]$lower = c(1e-7,1e-6,-5,-5,-5,-5,-5,1e-7,1e-7,1e-7,1e-6)
+    boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,5,5,9.9999,9.9999,9.9999,10)
   }
 
 ############# Hall 1970 Models ("model 5")

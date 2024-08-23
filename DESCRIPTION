@@ -1,10 +1,11 @@
 Package: CQ2
 Type: Package
-Title: Objective Calibration of Quick-Slow CQ Models
+Title: Objective Calibration of Baseflow and Quick-Slow CQ Models
 Version: 0.1.0
-Author: person("Thomas", "Westfall", email = "tomwestfall27@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "TBD"))
-Maintainer: Thomas Westfall <tomwestfall27@gmail.com>
-Description: This R package fits C-Q models with slow and quick flow components. The parameters of the Eckhardt (2005) baseflow filter are objectivly calibrated to partition streamflow into these components while fitting the quick-slow C-Q model.
+Author: "Thomas Westfall"
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true

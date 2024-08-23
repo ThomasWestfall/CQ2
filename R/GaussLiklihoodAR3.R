@@ -17,9 +17,12 @@ GaussLiklihoodAR3 <- function(params, conc, Pred, conc.date){
     sig <- params[4]
   }
 
+  force(p)
+  force(rho)
+
   #re-compute conc.date, if observed days are less than p+2 (2), then remove
-  if(any(conc.date[,2] - conc.date[,1] < 3)){
-    conc.date <- conc.date[-which(conc.date[,2] - conc.date[,1] < 3),]
+  if(any(conc.date[,2] - conc.date[,1] < 4)){
+    conc.date <- conc.date[-which(conc.date[,2] - conc.date[,1] < 4),]
   }
 
   error <- log(conc) - log(Pred)
@@ -72,6 +75,8 @@ GaussLiklihoodAR3 <- function(params, conc, Pred, conc.date){
   }else{
 
     if(p>1){
+
+
       Vp_list <- Covmatrix(p,rho)
     }else{
       Vp_list <- 1-rho^2
@@ -127,10 +132,10 @@ GaussLiklihoodAR3 <- function(params, conc, Pred, conc.date){
 
         negLL <- sapply(1:NCOL(Pred), function(i) ifelse(any(abs(AR.polynomial.roots[[i]])<=1), Inf, negLL[i]))
         # # If unit circle, the return false for AR being non-stationary
-        if (any(abs(AR.polynomial.roots)<=1)){
-          #make negLL Inf
-          negLL[is.na(negLL)] = Inf
-        }
+        # if (any(abs(AR.polynomial.roots)<=1)){
+        #   #make negLL Inf
+        #   negLL[is.na(negLL)] = Inf
+        # }
        }
       }else{
       if(any(is.finite(negLL))){
@@ -142,6 +147,8 @@ GaussLiklihoodAR3 <- function(params, conc, Pred, conc.date){
       }
     }
   }
+
+  negLL[is.na(negLL)] = Inf
 
   if(any(negLL == Inf)){
     message(paste(sum(!is.finite(negLL)),"negLL == Inf"))
