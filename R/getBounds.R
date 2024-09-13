@@ -11,38 +11,38 @@ getBounds <- function(Chat.model.name, Bhat.model.name, Likelihood.name){
 
   ################# one flow component models
 
-  if(Chat.model.name == "Chat1" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C1" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(2,-.2,.1)
     boundsList[[1]]$lower = c(-5,-5,1e-7)
     boundsList[[1]]$upper = c(5,5,10)
   }
 
-  if(Chat.model.name == "Chat1" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C1" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(3,-.2,9,.1)
     boundsList[[1]]$lower = c(-5,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(5,5,9.9999,10)
   }
 
-  if(Chat.model.name == "Chat1" & Likelihood.name == "GaussLiklihoodBV1"){
+  if(Chat.model.name == "C1" & Likelihood.name == "GaussLiklihoodBV1"){
     boundsList[[1]]$start.value = c(3,-.2,9,.1)
     boundsList[[1]]$lower = c(-5,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(5,5,9.9999,10)
   }
 
-  if(Chat.model.name == "Chat1" & Likelihood.name == "GaussLiklihoodAR3"){
+  if(Chat.model.name == "C1" & Likelihood.name == "GaussLiklihoodAR3"){
     boundsList[[1]]$start.value = c(2,-.2,1,2,1,.1)
     boundsList[[1]]$lower = c(-5,-5,1e-7,1e-7,1e-7,1e-7)
     boundsList[[1]]$upper = c(5,5,10,10,10,5)
   }
 
   # with seasonal terms...
-  # if(Chat.model.name == "Chat1_s" & Likelihood.name == "GaussLiklihood"){
+  # if(Chat.model.name == "C1_s" & Likelihood.name == "GaussLiklihood"){
   #   boundsList[[1]]$start.value = c(2,-.2,3,-1,.1)
   #   boundsList[[1]]$lower = c(-7,-5,-5,-5,1e-7)
   #   boundsList[[1]]$upper = c(5,5,5,5,5)
   # }
   #
-  # if(Chat.model.name == "Chat1_s" & Likelihood.name == "GaussLiklihoodAR1"){
+  # if(Chat.model.name == "C1_s" & Likelihood.name == "GaussLiklihoodAR1"){
   #   boundsList[[1]]$start.value = c(2,-.2,3,-1,9,.1)
   #   boundsList[[1]]$lower = c(-7,-5,-5,-5,1e-7,1e-7)
   #   boundsList[[1]]$upper = c(5,5,5,5,10,5)
@@ -50,19 +50,19 @@ getBounds <- function(Chat.model.name, Bhat.model.name, Likelihood.name){
 
   # with hystersis
 
-  if(Chat.model.name == "Chat2" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C2" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(2,-0.3,4,0.5)
     boundsList[[1]]$lower = c(-5,-5,-5,1e-7)
     boundsList[[1]]$upper = c(5,5,5,10)
   }
 
-  if(Chat.model.name == "Chat2" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C2" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(2,-0.3,4,9,0.5)
     boundsList[[1]]$lower = c(-5,-5,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(5,5,5,9.9999,10)
   }
 
-  if(Chat.model.name == "Chat2" & Likelihood.name == "GaussLiklihoodBV1"){
+  if(Chat.model.name == "C2" & Likelihood.name == "GaussLiklihoodBV1"){
     boundsList[[1]]$start.value = c(2,-0.3,4,9,0.5)
     boundsList[[1]]$lower = c(-5,-5,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(5,5,5,9.9999,10)
@@ -70,37 +70,37 @@ getBounds <- function(Chat.model.name, Bhat.model.name, Likelihood.name){
 
  ############ two flow component models from the literature
 
-  if(Chat.model.name == "Chat3" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C3" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(9,8,2,-0.3,2,-1,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-6,-5,-6,-5,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,4,5,4,5,10)
   }
 
-  if(Chat.model.name == "Chat3" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C3" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(9,8,2,-0.3,2,-1,9,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-6,-5,-6,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,4,5,4,5,9.9999,10)
   }
 
-  if(Chat.model.name == "Chat4" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C4" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(9,8,2,-0.3,2,-1,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-6,-5,-6,-5,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,4,5,4,5,10)
   }
 
-  if(Chat.model.name == "Chat4" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C4" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(9,8,2,-0.3,2,-1,9,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-6,-5,-6,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,4,5,4,5,9.9999,10)
   }
 
-  if(Chat.model.name == "Chat5" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C5" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(9,8,3,-0.3,-1,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-6,-5,-5,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,4,5,5,10)
   }
 
-  if(Chat.model.name == "Chat5" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C5" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(9,8,3,-0.3,-1,9,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-6,-5,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,4,5,5,9.9999,10)
@@ -108,73 +108,73 @@ getBounds <- function(Chat.model.name, Bhat.model.name, Likelihood.name){
 
 ################ two flow component variants derived for this study based on "simple CQ"
 
-  if(Chat.model.name == "Chat6" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C6" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(9,8,-0.3,2,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-7,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,4,10)
   }
 
-  if(Chat.model.name == "Chat6" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C6" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(9,8,-0.3,2,9,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,9.9999,10)
   }
 
-  if(Chat.model.name == "Chat7" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C7" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(9,8,-0.3,2,2,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-5,-5,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,10)
   }
 
-  if(Chat.model.name == "Chat7" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C7" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(9,8,-0.3,2,2,9,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-5,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,9.9999,10)
   }
 
-  if(Chat.model.name == "Chat8" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C8" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(9,8,-0.3,2,2,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-5,-5,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,10)
   }
 
-  if(Chat.model.name == "Chat8" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C8" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(9,8,-0.3,2,2,9,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-5,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,9.9999,10)
   }
 
-  if(Chat.model.name == "Chat9" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C9" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(9,8,-0.3,2,2,2,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-5,-5,-5,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,5,10)
   }
 
-  if(Chat.model.name == "Chat9" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C9" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(9,8,-0.3,2,2,2,9,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-5,-5,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,5,9.9999,10)
   }
 
-  if(Chat.model.name == "Chat10" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C10" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(9,8,-0.3,4,2,1,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-5,-5,-5,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,5,10)
   }
 
-  if(Chat.model.name == "Chat10" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C10" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(9,8,-0.3,4,2,1,9,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-5,-5,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,5,9.9999,10)
   }
 
-  if(Chat.model.name == "Chat11" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C11" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(9,8,2,4,2,1,2,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-5,-5,-5,-5,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,5,5,10)
   }
 
-  if(Chat.model.name == "Chat11" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C11" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(9,8,-0.3,4,2,1,2,9,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-5,-5,-5,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,5,5,9.9999,10)
@@ -183,13 +183,13 @@ getBounds <- function(Chat.model.name, Bhat.model.name, Likelihood.name){
 
 ############## Johnson 1969 Models
 
-  if(Chat.model.name == "Chat12" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C12" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(-0.3,1,1,0.5)
     boundsList[[1]]$lower = c(-5,-5,-5,1e-6)
     boundsList[[1]]$upper = c(5,5,5,10)
   }
 
-  if(Chat.model.name == "Chat12" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C12" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(-0.3,1,1,9,0.5)
     boundsList[[1]]$lower = c(-5,-5,-5,1e-7,1e-6)
     boundsList[[1]]$upper = c(5,5,5,9.9999,10)
@@ -197,19 +197,19 @@ getBounds <- function(Chat.model.name, Bhat.model.name, Likelihood.name){
 
 # with two flow components derived for this study
 
-  if(Chat.model.name == "Chat13" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C13" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(9,8,-0.3,1,1,1,1,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-5,-5,-5,-5,1e-6)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,5,5,10)
   }
 
-  if(Chat.model.name == "Chat13" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C13" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(9,8,-0.3,1,1,1,1,9,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-6,-5,-5,-5,-5,-5,1e-7,1e-6)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,5,5,9.9999,10)
   }
 
-  if(Chat.model.name == "Chat13" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR3"){
+  if(Chat.model.name == "C13" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR3"){
     boundsList[[1]]$start.value = c(9,8,-0.3,1,1,1,1,9,9,9,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-6,-5,-5,-5,-5,-5,1e-7,1e-7,1e-7,1e-6)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,5,5,5,9.9999,9.9999,9.9999,10)
@@ -217,13 +217,13 @@ getBounds <- function(Chat.model.name, Bhat.model.name, Likelihood.name){
 
 ############# Hall 1970 Models ("model 5")
 
-  if(Chat.model.name == "Chat14" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C14" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(-0.3,1,1,1,0.5)
     boundsList[[1]]$lower = c(-5,-5,-5,-5,1e-7)
     boundsList[[1]]$upper = c(5,5,5,5,10)
   }
 
-  if(Chat.model.name == "Chat14" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C14" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(-0.3,1,1,1,9,0.5)
     boundsList[[1]]$lower = c(-5,-5,-5,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(5,5,5,5,9.9999,10)
@@ -231,13 +231,13 @@ getBounds <- function(Chat.model.name, Bhat.model.name, Likelihood.name){
 
   # with two flow components derived for this study
 
-  if(Chat.model.name == "Chat15" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
+  if(Chat.model.name == "C15" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihood"){
     boundsList[[1]]$start.value = c(9,8,-0.3,4,1,1,1,1,1,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-5,-4,-4,-4,-5,-5,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,6,6,6,5,5,10)
   }
 
-  if(Chat.model.name == "Chat15" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
+  if(Chat.model.name == "C15" & Bhat.model.name == "BhatEck" & Likelihood.name == "GaussLiklihoodAR1"){
     boundsList[[1]]$start.value = c(9,8,-0.3,1,1,1,1,1,1,9,0.5)
     boundsList[[1]]$lower = c(1e-7,1e-7,-5,-5,-4,-4,-4,-5,-5,1e-7,1e-7)
     boundsList[[1]]$upper = c(9.9999,9.9999,5,5,6,6,6,5,5,9.9999,10)

@@ -1,4 +1,4 @@
-plot_CQ_scatter_compare <- function(site.id,site.name, model.name1,model.name2,model.short1,model.short2,data){
+plot_CQ_scatter_compare <- function(site.id,site.name, model.name1,model.name2,data){
   #if pdf...
   # par(mar = c(2, 2,2, 2))
 
@@ -14,10 +14,13 @@ plot_CQ_scatter_compare <- function(site.id,site.name, model.name1,model.name2,m
   mtext(paste(site.id," ",site.name,sep=""), side =3,cex = 1.2, padj = -.5)
 
   par(new =TRUE)
-  plot(log10(data$Q),log10(data[[paste("C",model.short2,sep="")]]), pch=19, cex = .5, col = "#fc8d59", xaxt ="n", yaxt = "n", xlab ="", ylab = "",xlim = xlimQ, ylim = ylimC)
+  plot(log10(data$Q),log10(data[[model.name2]]), pch=19, cex = .5, col = "#fc8d59", xaxt ="n", yaxt = "n", xlab ="", ylab = "",xlim = xlimQ, ylim = ylimC)
 
   par(new = TRUE)
-  plot(log10(data$Q),log10(data[[paste("C",model.short1,sep="")]]), pch=19, cex = .5, col = "#8856a7", xaxt ="n", yaxt = "n", xlab ="", ylab = "",xlim = xlimQ, ylim = ylimC)
+  plot(log10(data$Q),log10(data[[model.name1]]), pch=19, cex = .5, col = "#8856a7", xaxt ="n", yaxt = "n", xlab ="", ylab = "",xlim = xlimQ, ylim = ylimC)
+
+  legend("bottomleft", legend = c("Obs. C", model.name1, model.name2),
+         col = c("darkgrey","#8856a7","#fc8d59"), pch = 19, cex = 1)
 
 
   return(plot_CQ)

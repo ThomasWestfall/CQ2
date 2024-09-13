@@ -4,21 +4,16 @@
 \alias{getStats}
 \title{Get Stats}
 \usage{
-getStats(
-  Chat.model.names = c("Chat1", "Chat13"),
-  input.data = data_all,
-  cmaes.results = models,
-  model.setup = model.setup
-)
+getStats(model.setup = list())
 }
 \arguments{
+\item{model.setup}{lists of details about data, model, and site from setModels()}
+
 \item{Chat.model.names}{character string vector with a 'Chat#' model name from provided models (i.e. Chat1-Chat15). Chat1 and Chat13 default}
 
 \item{input.data}{dataframe of daily runoff and concentration AND predictions of concentration and baseflow}
 
 \item{cmaes.results}{list of cmaes.results from fitted models}
-
-\item{model.setup}{lists of details about data, model, and site from setModels()}
 }
 \value{
 output summary dataframe with statistics (negLL, AIC, NSE, RMSE, and BFI)

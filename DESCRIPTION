@@ -1,12 +1,13 @@
 Package: CQ2
 Type: Package
-Title: Objective Calibration of Baseflow and Quick-Slow CQ Models
+Title: Objective Calibration of Quick-Slow CQ Models and Baseflow
 Version: 0.1.0
-Author: "Thomas Westfall"
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author@R: c(
+    person("Thomas", "Westfall", email = "thomas.westfall1@monash.edu", role = c("aut", "cre"), comment = c(ORCID = "0009-0000-0529-881X")))
+Maintainer: Thomas Westfall <thomas.westfall1@monash.edu>
+Description: The CQ2 package evaluates a suite of C-Q models with single and multiple flow components on daily observations of streamflow and concentration. Models are globally calibrated with maximum likelihood estimation providing an objective estimate of baseflow in models with a slow-flow component. Calibrated models are compared to eachother and alongside observations with various plots and metrics (AIC, NSE, RMSE). There are 15 C-Q models available (C1 - C15). The default analysis will compare C1, the simple C-Q model \eqn{C=aQ^b} and C13, a quick-slow version of the Hubbard Brook working model, that was the best performing at explaining the varability in the C-Q relationship. Derivations and explanations of each model are located in the following article: Westfall T.G., Peterson T.J., Lintern A., Western, A.W (2024), Slow and quick flow models explain the temporal dynamics of daily salinity in streams (IN PREP).
+URL: https://github.com/ThomasWestfall/CQ2
+License: GPLv3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.1

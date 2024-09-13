@@ -1,2 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+Build_commands.R
+CQ2.pdf
+vignette

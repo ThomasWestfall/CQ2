@@ -5,18 +5,18 @@
 \title{Set models}
 \usage{
 setModels(
-  Chat.model.names = c("Chat1", "Chat13"),
-  input.data = data_all,
+  Chat.model.names = character(),
+  input.data = data.frame(year = c(), month = c(), day = c(), C = c(), Q = c()),
   Qthresh = 0,
   Likelihood.name = "GaussLiklihood",
-  site.id = "",
-  site.name = ""
+  site.id = character(),
+  site.name = character()
 )
 }
 \arguments{
 \item{Chat.model.names}{character string vector with a 'Chat#' model name from provided models (i.e. Chat1-Chat15). Chat1 and Chat13 default}
 
-\item{input.data}{dataframe of daily runoff and concentration. colnames = c("year", "month", "day", "C", "flow_mm_d")}
+\item{input.data}{dataframe of daily runoff and concentration. colnames = c("year", "month", "day", "C", "Q")}
 
 \item{Qthresh}{numeric low-flow streamflow threshold, models only fitted to observations with same day streamflow above this threshold.}
 

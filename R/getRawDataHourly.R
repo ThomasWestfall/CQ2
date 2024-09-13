@@ -42,7 +42,7 @@ getRawDataHourly <- function(path_of_files, output_path, sensor_ID, TDS_factor){
   print(paste("before ",before,sep=""))
   print(paste("after ",after,sep=""))
 
-  if (after != before) break
+  if(after != before){stop('after =/ before')}
 
   #all columns numeric
   cols.num <- c('FLOW_hrly','FLOW_hrly_e','TURB_SENS_NTU','TURB_SENS_NTU_e','EC_SENS_uscm','EC_SENS_uscm_e','DO_SENS_ppm','DO_SENS_ppm_e','pH_SENS','pH_SENS_e','TEMP_SENS_C','TEMP_SENS_C_e')

@@ -30,52 +30,60 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
 
     ########## single flow component models
 
-    if(noquote(Chat.model.names) %in%  c("Chat1")){
+    if(noquote(Chat.model.names) %in%  c("C1")){
 
-      parallel::clusterExport(cl,c("flow","sims_perCore","newgrid",noquote(Chat.model.names)),envir = environment())
+      parallel::clusterExport(cl,c("flow","sims_perCore","newgrid",noquote("Chat1")),envir = environment())
 
-      Pred <- parallel::parLapply(cl, 1:length(cl), function(u) match.fun(Chat.model.names)(params = newgrid[[u]][1:parlen,], matrix(flow,length(flow),ncol= sims_perCore[u])))
+      Pred <- parallel::parLapply(cl, 1:length(cl), function(u) Chat1(params = newgrid[[u]][1:parlen,], matrix(flow,length(flow),ncol= sims_perCore[u])))
 
-    }else if(noquote(Chat.model.names) %in% c("Chat12","Chat14")){
+    }else if(noquote(Chat.model.names) %in% c("C12")){
 
-      parallel::clusterExport(cl,c("flow","conc", "sims_perCore","newgrid","flow.date",noquote(Chat.model.names)),envir = environment())
+      parallel::clusterExport(cl,c("flow","conc", "sims_perCore","newgrid","flow.date",noquote("Chat12")),envir = environment())
 
-      Pred <- parallel::parLapply(cl, 1:length(cl), function(u) match.fun(Chat.model.names)(params = newgrid[[u]][1:parlen,], matrix(flow,length(flow),ncol= sims_perCore[u]),conc))
+      Pred <- parallel::parLapply(cl, 1:length(cl), function(u) Chat12(params = newgrid[[u]][1:parlen,], matrix(flow,length(flow),ncol= sims_perCore[u]),conc))
 
-    }else if(noquote(Chat.model.names) == "Chat2"){
+    }else if(noquote(Chat.model.names) == "C14"){
 
-      parallel::clusterExport(cl,c("flow","sims_perCore","newgrid","flow.date",noquote(Chat.model.names)),envir = environment())
+      parallel::clusterExport(cl,c("flow","conc", "sims_perCore","newgrid","flow.date",noquote("Chat14")),envir = environment())
 
-      Pred <- parallel::parLapply(cl, 1:length(cl), function(u) match.fun(Chat.model.names)(params = newgrid[[u]][1:parlen,], matrix(flow,length(flow),ncol= sims_perCore[u]),flow.date))
+      Pred <- parallel::parLapply(cl, 1:length(cl), function(u) Chat14(params = newgrid[[u]][1:parlen,], matrix(flow,length(flow),ncol= sims_perCore[u]),conc))
 
-    }else if(noquote(Chat.model.names) == "Chat1_s"){
+    }else if(noquote(Chat.model.names) == "C2"){
 
-      parallel::clusterExport(cl,c("flow","sims_perCore","newgrid","dec.time",noquote(Chat.model.names)),envir = environment())
+      parallel::clusterExport(cl,c("flow","sims_perCore","newgrid","flow.date",noquote("Chat2")),envir = environment())
 
-      Pred <- parallel::parLapply(cl, 1:length(cl), function(u) match.fun(Chat.model.names)(params = newgrid[[u]][1:parlen,], matrix(flow,length(flow),ncol= sims_perCore[u]),dec.time))
+      Pred <- parallel::parLapply(cl, 1:length(cl), function(u) Chat2(params = newgrid[[u]][1:parlen,], matrix(flow,length(flow),ncol= sims_perCore[u]),flow.date))
+
+    }else if(noquote(Chat.model.names) == "C1_s"){
+
+      parallel::clusterExport(cl,c("flow","sims_perCore","newgrid","dec.time",noquote("Chat1_s")),envir = environment())
+
+      Pred <- parallel::parLapply(cl, 1:length(cl), function(u) Chat1_s(params = newgrid[[u]][1:parlen,], matrix(flow,length(flow),ncol= sims_perCore[u]),dec.time))
 
       ########## all other Chat models with multiple flow components
 
-    }else if(noquote(Chat.model.names) %in%  c("Chat3","Chat4", "Chat5","Chat6","Chat7","Chat8","Chat9","Chat10","Chat11","Chat15")){
+    }else if(noquote(Chat.model.names) %in%  c("C3","C4", "C5","C6","C7","C8","C9","C10","C11","C15")){
+
+      temp.name = sub('.','Chat',Chat.model.names)
 
       parallel::clusterExport(cl,c("flow","flow.date","sims_perCore","newgrid",noquote(Bhat.model.name)),envir = environment())
 
       #two lapply functions to cycle through the numeric parameters in the list of cores
       flow.s <- parallel::parLapply(cl, 1:length(cl), function(u) lapply(1:sims_perCore[u], function(k) match.fun(Bhat.model.name)(params = c(newgrid[[u]][[1,k]], newgrid[[u]][[2,k]]), flow, flow.date))) #assign params in Bhat
 
-      parallel::clusterExport(cl,c("flow","flow.s","flow.date","sims_perCore","newgrid",noquote(Chat.model.names)),envir = environment())
+      parallel::clusterExport(cl,c("flow","flow.s","flow.date","sims_perCore","newgrid",noquote(temp.name)),envir = environment())
 
-      Pred <- parallel::parLapply(cl, 1:length(cl), function(u) match.fun(Chat.model.names)(params = newgrid[[u]][3:parlen,], matrix(flow,length(flow),ncol= sims_perCore[u]), matrix(unlist(flow.s[u]),ncol=sims_perCore[u]),flow.date))
+      Pred <- parallel::parLapply(cl, 1:length(cl), function(u) match.fun(temp.name)(params = newgrid[[u]][3:parlen,], matrix(flow,length(flow),ncol= sims_perCore[u]), matrix(unlist(flow.s[u]),ncol=sims_perCore[u]),flow.date))
 
-    }else if(noquote(Chat.model.names) == "Chat13"){ #Chat 13 is unique because we are using the recession constant from Bhat as a parameter in Chat...
+    }else if(noquote(Chat.model.names) == "C13"){ #Chat 13 is unique because we are using the recession constant from Bhat as a parameter in Chat...
 
       parallel::clusterExport(cl,c("flow","flow.date","sims_perCore","newgrid",noquote(Bhat.model.name)),envir = environment())
 
       flow.s <- parallel::parLapply(cl, 1:length(cl), function(u) lapply(1:sims_perCore[u], function(k) match.fun(Bhat.model.name)(params = c(newgrid[[u]][[1,k]], newgrid[[u]][[2,k]]), flow, flow.date)))
 
-      parallel::clusterExport(cl,c("flow","flow.s","conc","flow.date","sims_perCore","newgrid",noquote(Chat.model.names)),envir = environment())
+      parallel::clusterExport(cl,c("flow","flow.s","conc","flow.date","sims_perCore","newgrid",noquote("Chat13")),envir = environment())
 
-      Pred <- parallel::parLapply(cl, 1:length(cl), function(u) match.fun(Chat.model.names)(params = newgrid[[u]][1:parlen,], matrix(flow,length(flow),ncol= sims_perCore[u]), matrix(unlist(flow.s[u]),ncol=sims_perCore[u]),conc,flow.date))
+      Pred <- parallel::parLapply(cl, 1:length(cl), function(u) Chat13(params = newgrid[[u]][1:parlen,], matrix(flow,length(flow),ncol= sims_perCore[u]), matrix(unlist(flow.s[u]),ncol=sims_perCore[u]),conc,flow.date))
 
     }else if(endsWith(noquote(Chat.model.names), '_s')){  # pass dec.time to two flow component chat models with seasonal funciton
 
@@ -92,35 +100,38 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
   }else{
     parlen <- length(params)
 
-    if(noquote(Chat.model.names) %in%  c("Chat1")){
+    if(noquote(Chat.model.names) %in%  c("C1")){
 
-      Pred = match.fun(Chat.model.names)(params = params[1:parlen], flow)
+      Pred = Chat1(params = params[1:parlen], flow)
 
-    }else if(noquote(Chat.model.names) %in%  c("Chat12","Chat14")){
+    }else if(noquote(Chat.model.names) %in%  c("C12")){
 
-      Pred = match.fun(Chat.model.names)(params = params[1:parlen], flow, conc)
+      Pred = Chat12(params = params[1:parlen], flow, conc)
 
-    }else if(noquote(Chat.model.names) == "Chat2"){
+    }else if(noquote(Chat.model.names) %in%  c("C14")){
 
-      Pred = match.fun(Chat.model.names)(params = params[1:parlen], flow, flow.date)
+      Pred = Chat14(params = params[1:parlen], flow, conc)
 
-    }else if(noquote(Chat.model.names) == "Chat1_s"){
+    }else if(noquote(Chat.model.names) == "C2"){
 
-      Pred = match.fun(Chat.model.names)(params = params[1:parlen], flow, dec.time)
+      Pred = Chat2(params = params[1:parlen], flow, flow.date)
 
-    }else if(noquote(Chat.model.names) %in%  c("Chat3","Chat4", "Chat5","Chat6","Chat7","Chat8","Chat9","Chat10","Chat11","Chat15")){
+    }else if(noquote(Chat.model.names) == "C1_s"){
+
+      Pred = Chat1_s(params = params[1:parlen], flow, dec.time)
+
+    }else if(noquote(Chat.model.names) %in%  c("C3","C4", "C5","C6","C7","C8","C9","C10","C11","C15")){
+
+      temp.name = sub('.','Chat',Chat.model.names)
+
       flow.s = match.fun(Bhat.model.name)(params = params[1:2],flow, flow.date)
-      Pred = match.fun(Chat.model.names)(params = params[3:parlen], flow, flow.s, flow.date)
+      Pred = match.fun(temp.name)(params = params[3:parlen], flow, flow.s, flow.date)
 
-    }else if(noquote(Chat.model.names) == "Chat13"){
+    }else if(noquote(Chat.model.names) == "C13"){
       flow.s = match.fun(Bhat.model.name)(params = params[1:2],flow, flow.date)
-      Pred = match.fun(Chat.model.names)(params = params[1:parlen], flow, flow.s,conc, flow.date)
-
-
-    }else if(endsWith(noquote(Chat.model.names), '_s')){
-      flow.s = match.fun(Bhat.model.name)(params = params[1:2],flow, flow.date)
-      Pred = match.fun(Chat.model.names)(params = params[3:parlen], flow, flow.s, flow.date, dec.time)
+      Pred = Chat13(params = params[1:parlen], flow, flow.s,conc, flow.date)
     }
+
   }
 
   #negLL
@@ -173,7 +184,7 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
 
   ##  Check to make sure baseflow does not get stuck at lower and upper bounds
   if (NCOL(params)>1) {
-    if(noquote(Chat.model.names) %nin%  c("Chat1","Chat1_s", "Chat2", "Chat12", "Chat14")){ # do not run on one-flow component models
+    if(noquote(Chat.model.names) %nin%  c("C1","C1_s", "C2", "C12", "C14")){ # do not run on one-flow component models
 
       # BFI <- flow.s/flow
 
@@ -191,7 +202,7 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
 
   }else{
 
-    if(noquote(Chat.model.names) %nin%  c("Chat1","Chat1_s", "Chat2", "Chat12", "Chat14")){ # do not run on one-flow component models
+    if(noquote(Chat.model.names) %nin%  c("C1","C1_s", "C2", "C12", "C14")){ # do not run on one-flow component models
 
       BFI <- sum(flow.s, na.rm = TRUE)/sum(flow, na.rm = TRUE)
 
@@ -201,7 +212,7 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
   }
 
   # Check to make sure Cs > Cq in Chat 8 and Chat 9 ... if not, return Infinite negLL
-  if(noquote(Chat.model.names) %in% c("Chat8","Chat9")){
+  if(noquote(Chat.model.names) %in% c("C8","C9")){
     if (NCOL(params)>1) {
 
       negLL[which(params[4,]>params[5,])] = Inf
@@ -212,7 +223,7 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
   }
 
   # Check to make sure Cs > Cq in Chat 10 and Chat11 ... if not, return Infinite negLL
-  if(noquote(Chat.model.names) %in% c("Chat10","Chat11")){
+  if(noquote(Chat.model.names) %in% c("C10","C11")){
     if (NCOL(params)>1) {
 
       negLL[which(params[4,]>params[6,])] = Inf
@@ -223,7 +234,7 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
   }
 
   # Check to make sure Cs > Cq in Chat 13 ... if not, return Infinite negLL
-  if(noquote(Chat.model.names) == "Chat13"){
+  if(noquote(Chat.model.names) == "C13"){
     if (NCOL(params)>1) {
 
       negLL[which((10^params[6,]/10^params[3,])>(10^params[5,]))] = Inf
@@ -234,7 +245,7 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
   }
 
   # Check to make sure Cs > Cq in Chat 15
-  if(noquote(Chat.model.names) == "Chat15"){
+  if(noquote(Chat.model.names) == "C15"){
     if (NCOL(params)>1) {
 
       negLL[which((10^params[7,]/10^params[4,])>(10^params[6,]/10^params[3,]))] = Inf

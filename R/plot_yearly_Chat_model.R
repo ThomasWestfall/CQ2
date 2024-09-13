@@ -1,11 +1,11 @@
-plot_yearly_Chat_model_compare <- function(site.id,model.name1, model.name2,data_all){
+plot_yearly_Chat_model <- function(site.id,model.name1,data_all){
 
   #unique years & drought index
   uniqueyears <- unique(data_all$year)
 
   #open pdf printer and create plots
-  pdf(paste(site.id,"_",model.name1,"_vs_",model.name2,"_yearly.pdf",sep=""), width = 11, height = 8)
-    par(mar = c(6, 7,8, 8)) #margin
+  pdf(paste(site.id,"_",model.name1,"_yearly.pdf",sep=""), width = 11, height = 8)
+  par(mar = c(6, 7,8, 8)) #margin
   #1 plot on each page
   # layout_mat <- matrix(c(1,2), nrow = 2, ncol = 1,byrow = TRUE)
   # my_lay <- layout(mat = layout_mat, heights = c(4,4),widths = c(5,5), respect =TRUE)
@@ -29,8 +29,8 @@ plot_yearly_Chat_model_compare <- function(site.id,model.name1, model.name2,data
 
     # add baseflow to plot
     # par(new=TRUE)
-    if(model.name2 %in% c("C3","C4","C5","C6","C7","C8","C9","C10","C11","C13","C15")){
-      pframe <- data.frame(datetime,(data[[paste("Q",sub('.','', model.name2),sep="")]]))
+    if(model.name1 %in% c("C3","C4","C5","C6","C7","C8","C9","C10","C11","C13","C15")){
+      pframe <- data.frame(datetime,(data[[paste("Q",sub('.','', model.name1),sep="")]]))
       pframe <- pad(pframe,interval = "day")
       plot(pframe, type="l", col="#9ecae1", axes = FALSE, ylim = ylim.Q ,xlim=xlim.date, ylab="", xlab="", lwd=2)
       polygon(x = c(min(as.Date(pframe$datetime), na.rm = TRUE), as.Date(pframe$datetime,na.rm = TRUE),max(as.Date(pframe$datetime), na.rm = TRUE)),
@@ -61,23 +61,21 @@ plot_yearly_Chat_model_compare <- function(site.id,model.name1, model.name2,data
     plot(pframe, type="l", lty = 1,col="#8856a7", axes = FALSE, ylim = ylim.C, xlim=xlim.date, ylab="", xlab="", lwd=2)
     # mtext(paste(model.name1, side =3,cex = 1.5, padj = -2.5))
 
+    if(model.name1 %in% c("C3","C4","C5","C6","C7","C8","C9","C10","C11","C13","C15")){
 
-    # plot model two
-    par(new=TRUE)
-    pframe <- data.frame(datetime,data[[model.name2]])
-    pframe <- pad(pframe,interval = "day")
-    plot(pframe, type="l", lty = 1,col="#fc8d59", axes = FALSE, ylim = ylim.C, xlim=xlim.date, ylab="", xlab="", lwd=2)
-    # mtext(model.name, side =3,cex = 1.5, padj = -2.5)
+      legend(x = "top", y = par("usr")[4] - 0.1, legend = c("Obs. C",model.name1,"Q",paste("Q",sub('.','', model.name1),sep="")),
+           col = c("darkgray","#8856a7","#0072B4","#9ecae1"),lty = c(1,1,1,1),lwd=1, pt.cex = 0.1, pch = 16,cex = 1,
+           ncol=4, inset=c(0, -.1), xpd=TRUE)
+    }else{
 
+      legend(x = "top", y = par("usr")[4] - 0.1, legend = c("Obs. C",model.name1,"Q"),
+             col = c("darkgray","#8856a7","#0072B4"),lty = c(1,1,1),lwd=1, pt.cex = 0.1, pch = 16,cex = 1,
+             ncol=3, inset=c(0, -.1), xpd=TRUE)
 
-
-
-    legend(x = "top", y = par("usr")[4] - 0.1, legend = c("Obs. C",model.name1,model.name2,"Q",paste("Q",sub('.','', model.name2),sep="")),
-           col = c("darkgray","#8856a7","#fc8d59","#0072B4","#9ecae1"),lty = c(1,1,1,1,1),lwd=1, pt.cex = 0.1, pch = 16,cex = 1,
-           ncol=5, inset=c(0, -.1), xpd=TRUE)
+    }
 
 
-    title(paste(site.id," ",model.name1," vs. ", model.name2,sep=""))
+    title(paste(site.id," ",model.name1,sep=""))
 
 
 
@@ -91,8 +89,3 @@ plot_yearly_Chat_model_compare <- function(site.id,model.name1, model.name2,data
 
   return(output.plot)
 }
-
-
-
-
-

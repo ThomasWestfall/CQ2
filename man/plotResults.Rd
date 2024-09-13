@@ -5,17 +5,17 @@
 \title{plot Results}
 \usage{
 plotResults(
-  Chat.model.names = c("Chat1", "Chat13"),
-  input.data = data.frame(),
-  model.setup = model.setup
+  model.setup = list(),
+  output.data = data.frame(),
+  plot.models = character(c())
 )
 }
 \arguments{
-\item{Chat.model.names}{character string vector with a 'Chat#' model name from provided models (i.e. Chat1-Chat15). Chat1 and Chat13 default}
-
-\item{input.data}{dataframe of daily runoff and concentration AND predictions of concentration and baseflow}
-
 \item{model.setup}{lists of details about data, model, and site from setModels()}
+
+\item{output.data}{dataframe of daily concentration and baseflow predictions from \code{getResults}}
+
+\item{plot.models}{character string vector with a 'C#' model name from provided models (i.e. C1-C15). Ch1 and C13 default. Two model limit.}
 }
 \value{
 annual timeseries plot comparing predictions from two models with observations, streamflow and baseflow; C-Q scatter plots of each model
@@ -27,6 +27,6 @@ plotResults plots predictions from each fitted C-Q model
 \code{plotResults}
 
 
-plots with parameters from fitted C-Q models
+plots C-Q scatter plots and annual timeseries with predictions from fitted C-Q models
 }
 \keyword{plotResults}

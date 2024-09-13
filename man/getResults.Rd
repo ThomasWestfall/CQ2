@@ -4,12 +4,12 @@
 \alias{getResults}
 \title{Get Results}
 \usage{
-getResults(cmaes.results = list(), model.setup = model.setup)
+getResults(model.setup = list())
 }
 \arguments{
-\item{cmaes.results}{list of cmaes.results from fitted models}
-
 \item{model.setup}{lists of details about data, model, and site from setModels()}
+
+\item{cmaes.results}{list of cmaes.results from fitted models}
 }
 \value{
 output original data_all dataframe with predicted concentration and baseflow of fitted models
