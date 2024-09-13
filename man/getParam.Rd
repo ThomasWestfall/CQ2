@@ -4,24 +4,15 @@
 \alias{getParam}
 \title{Get Param}
 \usage{
-getParam(
-  Chat.model.names = c("Chat1", "Chat13"),
-  input.data = data_all,
-  cmaes.results = model,
-  model.setup = model.setup
-)
+getParam(model.setup = list(), output.data = dataframe())
 }
 \arguments{
-\item{Chat.model.names}{character string vector with a 'Chat#' model name from provided models (i.e. Chat1-Chat15). Chat1 and Chat13 default}
+\item{model.setup}{lists of details about data, model, and site from \code{setModels}}
 
-\item{input.data}{dataframe of daily runoff and concentration AND predictions of concentration and baseflow}
-
-\item{cmaes.results}{list of cmaes.results from fitted models}
-
-\item{model.setup}{lists of details about data, model, and site from setModels()}
+\item{output.data}{dataframe of daily concentration and baseflow predictions from \code{getResults}}
 }
 \value{
-output summary dataframe with statistics (negLL, AIC, NSE, RMSE, and BFI)
+output summary dataframe with parameters for fitted models
 }
 \description{
 getParam outputs the parameters for each fitted C-Q model
