@@ -195,7 +195,7 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
       negLL <- ifelse((BFI < 0.05 | BFI > 0.95),Inf,negLL)
 
       if(length(BFI)-sum(BFI < 0.05 | BFI > 0.95) > 0){
-        message(paste(length(BFI)-sum(BFI < 0.05 | BFI > 0.95),"negLL == Inf because BFI is < 0.05 or BFI > 0.95"))
+        # message(paste(length(BFI)-sum(BFI < 0.05 | BFI > 0.95),"negLL == Inf because BFI is < 0.05 or BFI > 0.95"))
       }
 
     }
@@ -266,7 +266,7 @@ objective_function_factory <- function(flow, conc, flow.date, conc.date, dec.tim
 
     # if(isFALSE(all.equal(negLL[27],negLL.rerun))){
     if(isFALSE(negLL[27] == negLL.rerun)){
-      message(paste("negLL[27] does not equal re-run of params[,27] = ",negLL[27],"  ",negLL.rerun))
+      # message(paste("negLL[27] does not equal re-run of params[,27] = ",negLL[27],"  ",negLL.rerun))
     }
   }
 

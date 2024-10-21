@@ -7,7 +7,8 @@ getHourlyData <- function(sensor_hrly,catchment_area,important_parameter){
   data_hrly <-  sensor_hrly[seq_along(sensor_hrly[,1]) >= first_data_row, ]
 
   # Find datetime values containing '00:00:00'
-  df_midnight <- data_hrly[grepl("00:00:00", data_hrly$TimeDate), ]
+  df_midnight <- data_hrly[grepl("00:00:00", as.character(format(data_hrly$TimeDate,format="%Y-%m%-%d %T"))), ]
+
 
   #find first data row that begins at midnight
   first_midnight_row <- which(data_hrly$TimeDate == df_midnight[1,1])
@@ -38,7 +39,7 @@ getHourlyData <- function(sensor_hrly,catchment_area,important_parameter){
               pH_SENS_e = pH_SENS_e,
               TEMP_SENS_C = TEMP_SENS_C,
               TEMP_SENS_C_e= TEMP_SENS_C_e) %>%
-    mutate(hour = hour(TimeDate),day = day(TimeDate),month = month(TimeDate), year = year(TimeDate),DecYear = decimal_date(TimeDate))
+    mutate(hour = lubridate::hour(TimeDate),day = lubridate::day(TimeDate),month = lubridate::month(TimeDate), year = lubridate::year(TimeDate),DecYear = lubridate::decimal_date(TimeDate))
 
   return(data_hrly)
 }

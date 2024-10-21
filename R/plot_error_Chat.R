@@ -36,19 +36,9 @@ plot_error_Chat <- function(site.id,model.name, model.short, Chat.residuals, flo
   # par(mar = c(0.5, 0.5,0.5, 0.5))
   x.limit = c(-2, 2)
   y.limit = c(-1.5, 2)
-  plot.RQ = plot(log10(flow), Chat.residuals, xlim = x.limit, ylim = y.limit, col = "black", pch = 20, ylab = "Residuals", xlab = "Discharge (log10 - mm/day)", cex =.5)
+  plot.RQ = plot(log10(flow), Chat.residuals, xlim = x.limit, ylim = y.limit, col = alpha("black", 0.3), pch = 20, ylab = "Residuals", xlab = "Discharge (log10 - mm/day)", cex =.5)
   abline(h=0, col = "#d7191c", lty = 2)
   dev.off()
-
-  svglite(paste(site.id,"_",model.name,"_RQ",".svg",sep=""),  width = 3, height = 3, bg = "transparent", pointsize = 8)
-
-  # par(mar = c(0.5, 0.5,0.5, 0.5))
-  x.limit = c(-2, 2)
-  y.limit = c(-1.5, 2)
-  plot.RQ = plot(log10(flow), Chat.residuals, xlim = x.limit, ylim = y.limit, col = "black", pch = 20, ylab = "Residuals", xlab = "Discharge (log10 - mm/day)", cex =.5)
-  abline(h=0, col = "#d7191c", lty = 2)
-  dev.off()
-
 
   svglite(paste(site.id,"_",model.name,"_histogram",".svg",sep=""),  width = 3, height = 3, bg = "transparent", pointsize = 8)
 

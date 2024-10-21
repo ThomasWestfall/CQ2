@@ -67,8 +67,8 @@ setModels <- function(Chat.model.names = character(),
   indQ <- (!is.na(Q))&(Q>=Qthresh)
   ind <- ifelse(indC + indQ == 2, TRUE,FALSE) #(TRUE + TRUE = 2)
 
-  # get index of start and end periods in two columns
-  deltaC = getStartEndIndex(ind,0)
+  # get index of start and end periods in two columns, must have two days of data at least in each period...
+  deltaC = getStartEndIndex(ind,1)
   rm(ind)
 
   # only run baseflow filter for observed Q greater than zero on continuous periods greater than or equal to 3 days
@@ -359,7 +359,7 @@ getStats <- function(model.setup = list(),
     NSE = 1 - (sum((output.data$C[indC] - output.data[[names(model.setup$model.output[k])]][indC])^2,na.rm = TRUE) / sum((output.data$C[indC] - mean(output.data[[names(model.setup$model.output[k])]][indC],na.rm=TRUE))^2,na.rm=TRUE))
 
     #RMSE
-    RMSE <- sqrt(sum((output.data$C[indC] - output.data[[names(model.setup$model.output[k])]][indC])^2)/sum(indC))
+    RMSE <- sqrt(sum((output.data$C[indC] - output.data[[names(model.setup$model.output[k])]][indC])^2, na.rm = TRUE)/sum(indC))
 
     if(names(model.setup$model.output[k]) %in%  c("C1","C1_s", "C2", "C12", "C14")){
       BFI <- NA

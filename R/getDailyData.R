@@ -1,13 +1,13 @@
 getDailyData <- function(sensor_hrly,catchment_area,important_parameter){
 
   #find first data row when most_important parameter data begins
-  first_data_row <- which(!is.na(sensor_hrly[[important_parameter]]))[1]
+  first_data_row <- 1 #which(!is.na(sensor_hrly[[important_parameter]]))[1]
 
   #filter, keep only rows after when most_important parameter data begins
   data_hrly <-  sensor_hrly[seq_along(sensor_hrly[,1]) >= first_data_row, ]
 
   # Find datetime values containing '00:00:00'
-  df_midnight <- data_hrly[grepl("00:00:00", data_hrly$TimeDate), ]
+  df_midnight <- data_hrly[grepl("00:00:00", as.character(format(data_hrly$TimeDate,format="%Y-%m%-%d %T"))), ]
 
   #find first data row that begins at midnight
   first_midnight_row <- which(data_hrly$TimeDate == df_midnight[1,1])
@@ -32,7 +32,7 @@ getDailyData <- function(sensor_hrly,catchment_area,important_parameter){
               EC_SENS_uscm = sum(EC_SENS_uscm*FLOW_hrly)/sum(FLOW_hrly),
               EC_SENS_uscm_e = mean(EC_SENS_uscm_e),
               TDS = sum(TDS*FLOW_hrly)/sum(FLOW_hrly),
-              TDS_load_kg_d = sum(TDS_load_kg_h),
+              # TDS_load_kg_d = sum(TDS_load_kg_h),
               TURB_SENS_NTU = mean(TURB_SENS_NTU),
               TURB_SENS_NTU_e = mean(TURB_SENS_NTU_e),
               DO_SENS_ppm = mean(DO_SENS_ppm),
@@ -46,7 +46,7 @@ getDailyData <- function(sensor_hrly,catchment_area,important_parameter){
 
   #add date columns
   data_daily <- data_daily %>%
-    mutate(day = day(Date),month = month(Date), year = year(Date),DecYear = decimal_date(Date))
+    mutate(day = lubridate::day(Date),month = lubridate::month(Date), year = lubridate::year(Date),DecYear = lubridate::decimal_date(Date))
 
   return(data_daily)
 }

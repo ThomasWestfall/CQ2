@@ -1,3 +1,4 @@
+#' @export BhatEck
 BhatEck <- function(params, flow, flow.date) { # # # Su (2016)/ Eckhardt (2005) baseflow
 
 
@@ -15,7 +16,7 @@ BhatEck <- function(params, flow, flow.date) { # # # Su (2016)/ Eckhardt (2005) 
       end_ind <- start_ind + diff_d
 
       # initiate start values of each continuous period with stream flow
-      flow.pred[start_ind] <- flow[start_ind]
+      flow.pred[start_ind] <- flow[start_ind]*0.5
 
       # only run baseflow filter if more than one day of streamflow
       if(length(start_ind:end_ind) > 1){

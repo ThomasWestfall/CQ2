@@ -9,11 +9,12 @@ library(padr)
 CQ.daily = readRDS('data/234201B_daily.rds')
 
 # set-up models
-models = setModels(Chat.model.names = c('C13'),
-                        input.data = CQ.daily,
-                        Likelihood.name = "GaussLiklihood",
-                        site.id = "234201B",
-                        site.name = "Woady Yaloak")
+models = setModels(Chat.model.names = c('C1','C13'),
+                   input.data = CQ.daily,
+                   Likelihood.name = "GaussLiklihood",
+                   Qthresh = 0.005,
+                   site.id = "234201B",
+                   site.name = "Woady Yaloak")
 
 # Fit models
 models = runModels(model.setup = models)
@@ -24,7 +25,7 @@ model.output = getResults(model.setup = models)
 # plot timeseries and C-Q scatter plots from two models
 output.plots = plotResults(model.setup = models,
                           output.data = model.output,
-                          plot.models = c('C13'),
+                          plot.models = c('C1','C13'),
                           plot.type = "scatter")
 
 # export summary of statistics as a dataframe
@@ -34,3 +35,6 @@ output_summary = getStats(model.setup = models,
 # export parameters from each model
 parameter_summary = getParam(model.setup = models,
                              output.data = model.output)
+
+save("temp.Rdata")
+

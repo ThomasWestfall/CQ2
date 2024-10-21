@@ -11,8 +11,10 @@ Chat13 <- function(params, flow, flow.s, conc, flow.date) { # Hubbard Brook Work
     V0 <- 10^params[7,]
 
 
+
     Pred <-  sweep(sweep(sweep(flow.s, MARGIN = 2, ys, '*'), MARGIN = 2, Cs, '*') + sweep(flow.q, MARGIN = 2, Cqyq, '*'),MARGIN = 2, L0,'+') /
       (sweep(sweep(flow.s, MARGIN = 2, ys, '*') + sweep(flow.q, MARGIN = 2, yq, '*'),MARGIN=2,V0,'+'))
+
 
 
   } else {
@@ -24,8 +26,8 @@ Chat13 <- function(params, flow, flow.s, conc, flow.date) { # Hubbard Brook Work
     Cqyq <- 10^params[6]
     V0 <- 10^params[7]
 
-
     Pred <- (L0 + Cs*ys*flow.s + Cqyq*flow.q) / (V0 + ys*flow.s + yq*flow.q)
+
   }
 
 

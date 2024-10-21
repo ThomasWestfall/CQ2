@@ -12,10 +12,13 @@ getRawDataHourly <- function(path_of_files, output_path, sensor_ID, TDS_factor){
   # sensor_ID <- substr(sensor_ID,1,nchar(sensor_ID)-4)
 
   #option to create output folder
-  folders <- list.dirs(path = paste(output_path), full.names = FALSE, recursive = TRUE)
+  # folders <- list.dirs(path = paste(output_path), full.names = FALSE, recursive = TRUE)
+  #
+  # setwd(paste(output_path,"/",sensor_ID,sep=""))
+  # getwd()
 
-  setwd(paste(output_path,"/",sensor_ID,sep=""))
-  getwd()
+  # # #remove last 1 characters, ".txt"
+  # sensor_ID <- substr(sensor_ID,1,nchar(sensor_ID)-1)
 
   filename <- paste(path_of_files,"/",sensor_ID,".txt", sep = "")
 
@@ -55,8 +58,8 @@ getRawDataHourly <- function(path_of_files, output_path, sensor_ID, TDS_factor){
   WQ_col <- c('TURB_SENS_NTU','EC_SENS_uscm','DO_SENS_ppm','pH_SENS','TEMP_SENS_C','TDS')
 
   #### create dataframe for every hour in record IF required (for irregular timeseries)
-  start <- as_datetime(sensor[1,1])
-  end <- as_datetime(sensor[nrow(sensor),1])
+  start <- lubridate::as_datetime(sensor[1,1])
+  end <- lubridate::as_datetime(sensor[nrow(sensor),1])
   diff_dates <- difftime(end,start, units = "hours")
 
   #only infills date and time, discharge and WQ values left alone
