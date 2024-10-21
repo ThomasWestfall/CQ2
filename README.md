@@ -78,7 +78,7 @@ output.plots = plotResults(model.setup = models,
                           plot.type = "scatter")
 ```
 <center>
-![CQ observations and predictions from both models](https://github.com/ThomasWestfall/CQ2/blob/main/data/CQ_plot_234201B.png){width=50%}
+![CQ observations and predictions from both models](https://github.com/ThomasWestfall/CQ2/blob/main/data/CQ_plot_234201B.png?raw=true){width=50%}
 </center>
 ```
 # plot C-Q timeseries from two models
@@ -94,7 +94,7 @@ output.plots = plotResults(model.setup = models,
                           
 ```
 <center>
-![Example of timeseries figure on one-page of PDF exported](https://github.com/ThomasWestfall/CQ2/blob/main/data/CQ_timeseries_234201B_1994.png){width=70%}
+![Example of timeseries figure on one-page of PDF exported](https://github.com/ThomasWestfall/CQ2/blob/main/data/CQ_timeseries_234201B_1994.png?raw=true){width=70%}
 </center>
 
 ## Export statistics and parameters
