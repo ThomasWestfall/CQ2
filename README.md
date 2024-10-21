@@ -77,9 +77,9 @@ output.plots = plotResults(model.setup = models,
                           plot.models = c('C1','C13'),
                           plot.type = "scatter")
 ```
-<center>
+
 ![CQ observations and predictions from both models](https://github.com/ThomasWestfall/CQ2/blob/main/data/CQ_plot_234201B.png?raw=true){width=50%}
-</center>
+
 ```
 # plot C-Q timeseries from two models
 
@@ -93,9 +93,9 @@ output.plots = plotResults(model.setup = models,
                           plot.type = "timeseries")
                           
 ```
-<center>
+
 ![Example of timeseries figure on one-page of PDF exported](https://github.com/ThomasWestfall/CQ2/blob/main/data/CQ_timeseries_234201B_1994.png?raw=true){width=70%}
-</center>
+
 
 ## Export statistics and parameters
 A data frame is exported with the negative log-likelihood, AIC, NSE, and RMSE for each model that is calculated on the fitted data. The calculated BFI is also given for quick-slow models.
