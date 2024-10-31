@@ -9,9 +9,9 @@ GaussLiklihood <- function(params, conc, Pred, conc.date){
   }
 
   #re-compute conc.date, if observed days are less than (1), then remove
-  # if(any(conc.date[,2] - conc.date[,1] < 1)){
-  #   conc.date <- conc.date[-which(conc.date[,2] - conc.date[,1] < 1),]
-  # }
+  if(any(conc.date[,2] - conc.date[,1] < 1)){
+    conc.date <- conc.date[-which(conc.date[,2] - conc.date[,1] < 1),]
+  }
 
   error <- log(conc) - log(Pred)
 

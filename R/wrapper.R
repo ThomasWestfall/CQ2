@@ -67,12 +67,12 @@ setModels <- function(Chat.model.names = character(),
   indQ <- (!is.na(Q))&(Q>=Qthresh)
   ind <- ifelse(indC + indQ == 2, TRUE,FALSE) #(TRUE + TRUE = 2)
 
-  # get index of start and end periods in two columns, must have two days of data at least in each period...
-  deltaC = getStartEndIndex(ind,1)
+  # get index of start and end periods in two columns, must have three days of data at least in each period...
+  deltaC = getStartEndIndex(ind,3)
   rm(ind)
 
   # only run baseflow filter for observed Q greater than zero on continuous periods greater than or equal to 3 days
-  indQ <- (!is.na(Q))&(Q>0)
+  indQ <- (!is.na(Q))
 
   # get index of start and end periods in two columns
   deltaQ = getStartEndIndex(indQ,3)

@@ -9,10 +9,14 @@ Below is an example for building, fitting, and evaluating the simple C-Q model (
 
 This _CQ2_ example sets-up and calibrates two models, then plots their results.
 
-## Load packages and data
+```r
+# Install and load the CQ2 package
+devtools::install_github("ThomasWestfall/CQ2")
+```
+
+## Load additional packages and data
 ```r
 #----------------
-rm(list=ls())
 # Install and load the cmaesr and padr package
 devtools::install_github("jakobbossek/cmaesr")
 library(cmaesr)
