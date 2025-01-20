@@ -13,7 +13,7 @@ library(Hmisc)
 CQ.daily = readRDS('data/234201B_daily.rds')
 
 # set-up models
-models = setModels(Chat.model.names = c('C1','C3'),
+models = setModels(Chat.model.names = c('C1','C13'),
                    input.data = CQ.daily,
                    Likelihood.name = "GaussLiklihood",
                    Qthresh = 0.005,
@@ -29,7 +29,7 @@ model.output = getResults(model.setup = models)
 # plot timeseries and C-Q scatter plots from two models
 output.plots = plotResults(model.setup = models,
                           output.data = model.output,
-                          plot.models = c('C1','C13'),
+                          plot.models = c('C1','C3'),
                           plot.type = "scatter")
 
 # export summary of statistics as a dataframe
