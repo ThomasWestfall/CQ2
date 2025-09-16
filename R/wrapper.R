@@ -440,7 +440,7 @@ getParam <- function(model.setup = list(),
 
     para.summary <- matrix(NA,nrow = 1,ncol = length(model.setup$model.output[[Chat.model.name]]$best.param)+3)
     para.summary[1,1] <- site.id
-    para.summary[1,2] <- names(model.setup$model.output[k])
+    para.summary[1,2] <- Chat.model.name
     # para.summary[1,3] <- "upper"
     para.summary[1,3] <- "est"
     # para.summary[3,3] <- "lower"
