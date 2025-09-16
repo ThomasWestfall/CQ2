@@ -494,6 +494,9 @@ plotResults <- function(model.setup = list(),
                         plot.type = "scatter"
                         ){
 
+  op <- par(no.readonly = T)
+  on.exit(par(op))
+
   if(length(plot.models)>2){
     stop("plot.models > 2, only 2 models can be plotted at once")
   }

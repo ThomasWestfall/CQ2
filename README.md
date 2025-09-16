@@ -17,13 +17,18 @@ devtools::install_github("ThomasWestfall/CQ2")
 ## Load additional packages and data
 ```r
 #----------------
-# Install and load the cmaesr and padr package
+# Install cmaesr, padr, and Hmisc packages
 devtools::install_github("jakobbossek/cmaesr")
+install.packages("padr")
+install.packages("Hmisc")
+
+# Load cmaesr, padr, and Hmisc packages
 library(cmaesr)
 library(padr)
+library(Hmisc)
 
 # load data
-CQ.daily = readRDS('data/234201B_daily.rds')
+CQ.daily = CQ2::CQ.daily_234201B
 
 # Validate column names as shown below
 head(CQ.daily)

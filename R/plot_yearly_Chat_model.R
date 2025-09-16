@@ -1,5 +1,8 @@
 plot_yearly_Chat_model <- function(site.id,model.name1,data_all){
 
+  op <- par(no.readonly = T)
+  on.exit(par(op))
+
   #unique years & drought index
   uniqueyears <- unique(data_all$year)
 
@@ -79,10 +82,7 @@ plot_yearly_Chat_model <- function(site.id,model.name1,data_all){
 
 
 
-    # Get input grapics settings
-    op <- par(no.readonly = T)
-    # reset graphics
-    par(op)
+
 
   }
   dev.off()
