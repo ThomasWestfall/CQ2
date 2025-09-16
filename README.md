@@ -107,7 +107,7 @@ output.plots = plotResults(model.setup = models,
 ![Example of timeseries figure on one-page of PDF exported](https://github.com/ThomasWestfall/CQ2/blob/main/data/CQ_timeseries_234201B_1994.png?raw=true){width=70%}
 
 
-## Export statistics and parameters
+## Export statistics
 A data frame is exported with the negative log-likelihood, AIC, NSE, and RMSE for each model that is calculated on the fitted data. The calculated BFI is also given for quick-slow models.
 ```r
 # export summary of statistics as a dataframe
@@ -118,9 +118,13 @@ head(output_summary)
 #>        ID model             negLL               AIC               NSE             RMSE             BFI
 #> 1 234201B    C1  4836.35090303965  9678.70180607931 0.232530854346575 1408.56860983028            <NA>
 #> 2 234201B   C13 -23.2978663965841 -30.5957327931683 0.735433480449069 824.072331651912 0.1161062944671
-
-# export parameters from each model
+```
+## Export parameters 
+Select one of the fitted models to export the parameters.
+```r
+# export parameters from a model
 parameter_summary = getParam(model.setup = models,
+                            Chat.model.name = "C13",
                              output.data = model.output)
 
 ```

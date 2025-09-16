@@ -4,7 +4,11 @@
 \alias{getParam}
 \title{Get Param}
 \usage{
-getParam(model.setup = list(), output.data = dataframe())
+getParam(
+  model.setup = list(),
+  Chat.model.name = character(),
+  output.data = dataframe()
+)
 }
 \arguments{
 \item{model.setup}{lists of details about data, model, and site from \code{setModels}}

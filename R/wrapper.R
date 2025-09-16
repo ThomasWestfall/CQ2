@@ -409,6 +409,7 @@ getStats <- function(model.setup = list(),
 #'
 
 getParam <- function(model.setup = list(),
+                     Chat.model.name = character(),
                      output.data = dataframe()){
 
   if(is.null(model.setup)){
@@ -418,23 +419,16 @@ getParam <- function(model.setup = list(),
     site.id = model.setup$site.info$site.id
   }
 
-  # if(length(names(model.setup$model.output))>1){
-  #
-  #   if(any(Chat.model.names) %nin% model.setup$models$Chat.model.names){
-  #     stop('please only choose a Chat model that has been fitted')
-  #   }
-  #
-  # }else{
-  #
-  #   if(Chat.model.names %nin% model.setup$models$Chat.model.names){
-  #     stop('please only choose a Chat model that has been fitted')
-  #   }
-  # }
 
-  para.list <- rep(list(rep(list()), length(names(model.setup$model.output))),1)
 
-  # for loop for each model
-  for(k in 1:length(names(model.setup$model.output))){
+    if(length(Chat.model.name) > 1){
+      stop('please only choose one Chat model')
+    }
+
+    if(Chat.model.name %nin% model.setup$models$Chat.model.names){
+      stop('please only choose a Chat model that has been fitted')
+    }
+
 
     # boundsList <- getBounds(Chat.model.names[k], Bhat.model.name, Likelihood.name)
 
@@ -443,18 +437,41 @@ getParam <- function(model.setup = list(),
     para.list[[k]] <- model.setup$model.output[[k]]$best.param
     names(para.list[[k]]) <- names(model.setup$model.output[k])
 
-    para.summary <- matrix(NA,nrow = length(names(model.setup$model.output[k])),ncol = length(model.setup$model.output[[k]]$best.param)+3)
-    para.summary[,1] <- site.id
-    para.summary[,2] <- names(model.setup$model.output[k])
+    para.summary <- matrix(NA,nrow = 1,ncol = length(model.setup$model.output[[Chat.model.name]]$best.param)+3)
+    para.summary[1,1] <- site.id
+    para.summary[1,2] <- names(model.setup$model.output[k])
     # para.summary[1,3] <- "upper"
     para.summary[1,3] <- "est"
     # para.summary[3,3] <- "lower"
+    names(para.summary)[1:3] <- c("Site","Model","Estimate")
 
     # para.summary[1,4:(length(cmaes.results[[k]]$best.param)+3)] <- boundsList[[noquote(Chat.model.names)]]$upper - cmaes.results[[k]]$best.param
-    para.summary[1,4:(length(model.setup$model.output[[k]]$best.param)+3)] <- model.setup$model.output[[k]]$best.param
+    para.summary[1,4:(length(model.setup$model.output[[Chat.model.name]]$best.param)+3)] <- model.setup$model.output[[Chat.model.name]]$best.param
     # para.summary[3,4:(length(cmaes.results[[k]]$best.param)+3)] <- cmaes.results[[k]]$best.param - boundsList[[noquote(Chat.model.names)]]$lower
 
-  }
+    if(Chat.model.name == "C13"){
+      names(para.summary)[4:length(para.summary)] <- c("A","B","yq","C0","Cs","Cq","V0","sigma")
+      para.summary[1,4] = para.summary[1,4]/10
+      para.summary[1,5] = para.summary[1,5]/10
+      para.summary[1,6] = log10(para.summary[1,6])
+      para.summary[1,7] = log10(para.summary[1,7])/log10(para.summary[1,10])
+      para.summary[1,8] = log10(para.summary[1,8])
+      para.summary[1,9] = log10(para.summary[1,9])/log10(para.summary[1,6])
+      para.summary[1,10] = log10(para.summary[1,10])
+      para.summary[1,11] = para.summary[1,11]/10
+
+
+    }
+
+    if(Chat.model.name == "C1"){
+      names(para.summary)[4:length(para.summary)] <- c("a","b","sigma")
+      para.summary[1,4] = log10(para.summary[1,4])
+      para.summary[1,5] = para.summary[1,5]
+      para.summary[1,6] = (para.summary[1,6])/10
+
+    }
+
+  # }
 
   return(as.data.frame(para.summary))
 
