@@ -435,8 +435,8 @@ getParam <- function(model.setup = list(),
 
     ##################### POST-RUN ANALYSIS ###########################
     # export parameters of each model for each rds_list
-    para.list[[k]] <- model.setup$model.output[[k]]$best.param
-    names(para.list[[k]]) <- names(model.setup$model.output[k])
+    # para.list[[k]] <- model.setup$model.output[[k]]$best.param
+    # names(para.list[[k]]) <- names(model.setup$model.output[k])
 
     para.summary <- matrix(NA,nrow = 1,ncol = length(model.setup$model.output[[Chat.model.name]]$best.param)+3)
     para.summary[1,1] <- site.id
