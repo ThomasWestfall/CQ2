@@ -1,7 +1,8 @@
+#' @export
 getDailyData <- function(sensor_hrly,catchment_area,important_parameter){
 
   #find first data row when most_important parameter data begins
-  first_data_row <- 1 #which(!is.na(sensor_hrly[[important_parameter]]))[1]
+  first_data_row <- which(!is.na(sensor_hrly[[important_parameter]]))[1]
 
   #filter, keep only rows after when most_important parameter data begins
   data_hrly <-  sensor_hrly[seq_along(sensor_hrly[,1]) >= first_data_row, ]
@@ -47,6 +48,8 @@ getDailyData <- function(sensor_hrly,catchment_area,important_parameter){
   #add date columns
   data_daily <- data_daily %>%
     mutate(day = lubridate::day(Date),month = lubridate::month(Date), year = lubridate::year(Date),DecYear = lubridate::decimal_date(Date))
+
+
 
   return(data_daily)
 }

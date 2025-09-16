@@ -20,33 +20,33 @@ plot_yearly_Chat_dot <- function(site.id,model.name,model.short,data){
 
     #set up axis and limits
     datetime <- as.Date(ISOdate(data$year,data$month,data$day))
-    xlim.date = as.Date(c(paste(uniqueyears[p],"-01-01", sep = ""),paste(uniqueyears[p],"-12-31",sep = "")))
+    xlim.date = as.Date(c(paste(data$year[1],"-01-01", sep = ""),paste(data$year[length(data$year)],"-12-31",sep = "")))
     ylim.C = c(min(na.omit(Cp)), max(na.omit(Cp)))
     # ylim.3 = c(min(na.omit(data[[noquote(model.name)]])),max(na.omit(data[[noquote(model.name)]])))
     ylim.Q = c(min((na.omit((Qp))))-0.2, max((na.omit((Qp))))+0.2)
     if(ylim.Q[1] == -Inf){ylim.Q[1] <- -4}
-    month_lab <- seq(xlim.date[1], xlim.date[2], by = "month")
+    month_lab <- seq(xlim.date[1], xlim.date[2], by = "year")
 
     # plot Obs C, pframe used due to gaps in the data
     pframe <- data.frame(datetime,Cp)
     pframe <- pad(pframe,interval = "day")
-    output.plot <- plot(pframe, type='l',col='darkgrey', lwd=1, ylim = ylim.C, xlim = xlim.date, xlab= paste(uniqueyears[p]), ylab='Salinity (mg/L)',xaxt='n', cex.lab = 1, cex.axis = 1)
-    axis(cex.axis = 1,side = 1, at = month_lab, labels = format(month_lab, "%b"))
+    output.plot <- plot(pframe, type='l',col='darkgrey', lwd=2, ylim = ylim.C, xlim = xlim.date, xlab= "Years", ylab='Salinity (mg/L)',xaxt='n', cex.lab = 2, cex.axis = 2)
+    axis(cex.axis = 2,side = 1, at = month_lab, labels = format(month_lab, "%b"))
     abline(v = month_lab, col = "lightgray", lty = "dotted")
 
     # plot flow, Q, on same plot
     par(new=TRUE)
-    pframe <- data.frame(datetime,(Qp))
+    pframe <- data.frame(datetime,((Qp)))
     pframe <- pad(pframe,interval = "day")
-    plot(pframe, type="l", col="#0072B4", xlim = xlim.date, ylim = ylim.Q, axes = FALSE, xlab="",ylab = "", lwd=0.5, cex.axis = 1,cex.lab = 1, las = 1)
-    mtext("Discharge (mm/day)", cex = 1, side = 4, line = 5)
-    axis(side = 4, cex.axis = 1, las=1, labels=TRUE)
+    plot(pframe, type="l", col="#0072B4", xlim = xlim.date, ylim = ylim.Q, axes = FALSE, xlab="",ylab = "", lwd=2, cex.axis = 2,cex.lab = 2, las = 1)
+    mtext("Discharge (mm/day)", cex = 2, side = 4, line = 5)
+    axis(side = 4, cex.axis = 2, las=1, labels=TRUE)
 
-    # plot Chat1 Pred from model
+    # #plot Chat1 Pred from model
     # par(new=TRUE)
     # pframe <- data.frame(datetime,data[[paste("C1",sep="")]])
     # pframe <- pad(pframe,interval = "day")
-    # plot(pframe, type="l", lty = 1,col="#8856a7", axes = FALSE, ylim = ylim.C, xlim=xlim.date, ylab="", xlab="", lwd=1)
+    # plot(pframe, type="l", lty = 1,col="#8856a7", axes = FALSE, ylim = ylim.C, xlim=xlim.date, ylab="", xlab="", lwd=2)
     # mtext(paste(model.name, side =3,cex = 1.5, padj = -2.5))
 
     if(model.name == "Chat1" || model.name == "Chat1_s" ){
@@ -74,7 +74,7 @@ plot_yearly_Chat_dot <- function(site.id,model.name,model.short,data){
       par(new=TRUE)
       pframe <- data.frame(datetime,data[[paste("C",model.short,sep="")]])
       pframe <- pad(pframe,interval = "day")
-      plot(pframe, type="l", lty = 1,col="#fc8d59", axes = FALSE, ylim = ylim.C, xlim=xlim.date, ylab="", xlab="", lwd=1)
+      plot(pframe, type="l", lty = 1,col="#fc8d59", axes = FALSE, ylim = ylim.C, xlim=xlim.date, ylab="", xlab="", lwd=2)
       # mtext(model.name, side =3,cex = 1.5, padj = -2.5)
 
       # add baseflow to plot
@@ -92,7 +92,7 @@ plot_yearly_Chat_dot <- function(site.id,model.name,model.short,data){
              ncol=5, inset=c(0, -0.0), xpd=TRUE)
     }
 
-    title(paste(site.id," ",model.name,sep=""))
+    # title(paste(site.id," ",model.name,sep=""))
 
 
     # Get input grapics settings

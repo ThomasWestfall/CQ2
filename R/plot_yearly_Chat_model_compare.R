@@ -1,10 +1,10 @@
 plot_yearly_Chat_model_compare <- function(site.id,model.name1, model.name2,data_all){
 
   #unique years & drought index
-  uniqueyears <- unique(data_all$year)
+  uniqueyears <-unique(data_all$year)
 
   #open pdf printer and create plots
-  pdf(paste(site.id,"_",model.name1,"_vs_",model.name2,"_yearly.pdf",sep=""), width = 11, height = 8)
+  # pdf(paste(site.id,"_",model.name1,"_vs_",model.name2,"_yearly.pdf",sep=""), width = 11, height = 8)
     par(mar = c(6, 7,8, 8)) #margin
   #1 plot on each page
   # layout_mat <- matrix(c(1,2), nrow = 2, ncol = 1,byrow = TRUE)
@@ -32,7 +32,7 @@ plot_yearly_Chat_model_compare <- function(site.id,model.name1, model.name2,data
     if(model.name2 %in% c("C3","C4","C5","C6","C7","C8","C9","C10","C11","C13","C15")){
       pframe <- data.frame(datetime,(data[[paste("Q",sub('.','', model.name2),sep="")]]))
       pframe <- pad(pframe,interval = "day")
-      plot(pframe, type="l", col="#9ecae1", axes = FALSE, ylim = ylim.Q ,xlim=xlim.date, ylab="", xlab="", lwd=2)
+      plot(pframe, type="l", col="#9ecae1", axes = FALSE, ylim = ylim.Q ,xlim=xlim.date, ylab="", xlab="", lwd=1)
       polygon(x = c(min(as.Date(pframe$datetime), na.rm = TRUE), as.Date(pframe$datetime,na.rm = TRUE),max(as.Date(pframe$datetime), na.rm = TRUE)),
               y = c(-4,pframe[[2]],-4),
               border = NA, col = adjustcolor("#9ecae1", alpha.f=0.7))
@@ -50,30 +50,30 @@ plot_yearly_Chat_model_compare <- function(site.id,model.name1, model.name2,data
     par(new=TRUE)
     pframe <- data.frame(datetime,(Qp))
     pframe <- pad(pframe,interval = "day")
-    plot(pframe, type="l", col="#0072B4", xlim = xlim.date, ylim = ylim.Q, axes = FALSE, xlab="",ylab = "", lwd=2, cex.axis = 1,cex.lab = 1, las = 1)
+    plot(pframe, type="l", col="#0072B4", xlim = xlim.date, ylim = ylim.Q, axes = FALSE, xlab="",ylab = "", lwd=1, cex.axis = 1,cex.lab = 1, las = 1)
     mtext("Discharge (mm/day)", cex = 1, side = 4, line = 5)
     axis(side = 4, cex.axis = 1, las=1, labels=TRUE)
 
-    # plot model one
-    par(new=TRUE)
-    pframe <- data.frame(datetime,data[[model.name1]])
-    pframe <- pad(pframe,interval = "day")
-    plot(pframe, type="l", lty = 1,col="#8856a7", axes = FALSE, ylim = ylim.C, xlim=xlim.date, ylab="", xlab="", lwd=2)
-    # mtext(paste(model.name1, side =3,cex = 1.5, padj = -2.5))
+    # # plot model one
+    # par(new=TRUE)
+    # pframe <- data.frame(datetime,data[[model.name1]])
+    # pframe <- pad(pframe,interval = "day")
+    # plot(pframe, type="l", lty = 2, col="black", axes = FALSE, ylim = ylim.C, xlim=xlim.date, ylab="", xlab="", lwd=1)
+    # # mtext(paste(model.name1, side =3,cex = 1.5, padj = -2.5))
 
 
     # plot model two
     par(new=TRUE)
     pframe <- data.frame(datetime,data[[model.name2]])
     pframe <- pad(pframe,interval = "day")
-    plot(pframe, type="l", lty = 1,col="#fc8d59", axes = FALSE, ylim = ylim.C, xlim=xlim.date, ylab="", xlab="", lwd=2)
+    plot(pframe, type="l", lty = 1,col="#238b45", axes = FALSE, ylim = ylim.C, xlim=xlim.date, ylab="", xlab="", lwd=2)
     # mtext(model.name, side =3,cex = 1.5, padj = -2.5)
 
 
 
 
     legend(x = "top", y = par("usr")[4] - 0.1, legend = c("Obs. C",model.name1,model.name2,"Q",paste("Q",sub('.','', model.name2),sep="")),
-           col = c("darkgray","#8856a7","#fc8d59","#0072B4","#9ecae1"),lty = c(1,1,1,1,1),lwd=1, pt.cex = 0.1, pch = 16,cex = 1,
+           col = c("darkgray","black","#b2e2e2","#0072B4","#9ecae1"),lty = c(1,2,1,1,1),lwd=1, pt.cex = 0.1, pch = 16,cex = 1,
            ncol=5, inset=c(0, -.1), xpd=TRUE)
 
 
@@ -87,7 +87,7 @@ plot_yearly_Chat_model_compare <- function(site.id,model.name1, model.name2,data
     par(op)
 
   }
-  dev.off()
+  # dev.off()
 
   return(output.plot)
 }

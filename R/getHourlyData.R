@@ -1,3 +1,4 @@
+#' @export
 getHourlyData <- function(sensor_hrly,catchment_area,important_parameter){
 
   #find first data row when most_important parameter data begins

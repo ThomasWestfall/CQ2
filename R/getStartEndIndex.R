@@ -1,3 +1,4 @@
+#' @export
 getStartEndIndex <- function(data_index, minimum_period){
 
   ind.d <- data_index[2:NROW(data_index)] - data_index[1:(NROW(data_index)-1)]

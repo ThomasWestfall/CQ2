@@ -1,9 +1,10 @@
 # Re-formats raw WQ and streamflow data from .txt files to dataframe
-# Only for Victoria water quality records
-# Infills date and time if missing
-# Does not infill or do anything with data
+#' @export
+getRawDataHourly <- function(path_of_files, sensor_ID, TDS_factor){
 
-getRawDataHourly <- function(path_of_files, output_path, sensor_ID, TDS_factor){
+  # Only for Victoria water quality records
+  # Infills date and time if missing
+  # Does not infill or do anything with data
 
   # if want to shop for ID...
   # sensor_ID <- list.files(path = path_of_files, full.names = FALSE, recursive = TRUE)
