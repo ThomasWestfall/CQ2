@@ -396,6 +396,7 @@ getStats <- function(model.setup = list(),
 #' exported datafame with parameters from fitted C-Q models
 #'
 #' @param model.setup lists of details about data, model, and site from \code{setModels}
+#' @param Chat.model.name character string of one fitted model (i.e. "C13")
 #' @param output.data dataframe of daily concentration and baseflow predictions from \code{getResults}
 #'
 #'
@@ -425,7 +426,7 @@ getParam <- function(model.setup = list(),
       stop('please only choose one Chat model')
     }
 
-    if(Chat.model.name %nin% model.setup$models$Chat.model.names){
+    if(Chat.model.name %nin% model.setup$model.names$Chat.model.names){
       stop('please only choose a Chat model that has been fitted')
     }
 
