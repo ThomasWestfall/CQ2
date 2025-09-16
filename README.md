@@ -12,6 +12,7 @@ This _CQ2_ example sets-up and calibrates two models, then plots their results.
 ```r
 # Install and load the CQ2 package
 devtools::install_github("ThomasWestfall/CQ2")
+library(CQ2)
 ```
 
 ## Load additional packages and data
