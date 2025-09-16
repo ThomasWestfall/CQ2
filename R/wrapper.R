@@ -20,6 +20,7 @@
 #'
 #' @keywords setModels
 #'
+#' @import Hmisc
 #'
 #' @export setModels
 #'
@@ -111,6 +112,8 @@ setModels <- function(Chat.model.names = character(),
 #'
 #' @keywords runModels
 #'
+#' @import Hmisc
+#' @import cmaesr
 #'
 #' @export runModels
 #'
@@ -123,7 +126,7 @@ runModels <- function(model.setup = list()){
     for(k in 1:length(model.setup$model.names$Chat.model.names)){
 
       # check models to run
-      if(model.setup$model.names$Chat.model.names[k] %nin%  c("C1","C2","C3","C4","C5","C6","C7","C8","C9","C10","C11","C12","C13","C14","C15")){
+      if(model.setup$model.names$Chat.model.names[k]  %nin%  c("C1","C2","C3","C4","C5","C6","C7","C8","C9","C10","C11","C12","C13","C14","C15")){
         stop(model.setup$model.names$Chat.model.names[k], ' is not one of the provided Chat models')
       }
 
@@ -480,6 +483,7 @@ getParam <- function(model.setup = list(),
 #'
 #' @keywords plotResults
 #'
+#' @import padr
 #'
 #' @export plotResults
 #'
