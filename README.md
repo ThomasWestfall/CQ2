@@ -49,7 +49,7 @@ Only the `Chat.model.names` as a character vector of model names (C1-C15) and `i
 models = setModels(Chat.model.names = c('C1','C13'),
                    input.data = CQ.daily,
                    Likelihood.name = "GaussLiklihood",
-                   Qthresh = 0.005,
+                   Qthresh = 0.0,
                    site.id = "234201B",
                    site.name = "Woady Yaloak")
 ```
