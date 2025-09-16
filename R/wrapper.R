@@ -516,7 +516,7 @@ plotResults <- function(model.setup = list(),
   if(length(plot.models) == 2){
 
     if(plot.models[1] %in% c("C3","C4","C5","C6","C7","C8","C9","C10","C11","C13","C15")){
-      stop("plot.models[1] must be a single flow component model")
+      stop("plot.models[1] must be a single flow component model (C1, C2, C12, C14)")
     }
 
     if(plot.type == "scatter" || is.null(plot.type)){

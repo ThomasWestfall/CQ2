@@ -18,8 +18,8 @@ plot_CQ_scatter_compare <- function(site.id,site.name, model.name1,model.name2,d
        # xlab="Observed log10(mg/L) ", ylab="Estimated log10(mg/L)")
   ##67a9cf
   ##ef8a62
-  # par(new = TRUE)
-  # plot(log10(data$Q),log10(data[[model.name1]]), pch=19, cex = .5, col = "black", xaxt ="n", yaxt = "n", xlab ="", ylab = "",xlim = xlimQ, ylim = ylimC)
+  par(new = TRUE)
+  plot(log10(data$Q),log10(data[[model.name1]]), pch=19, cex = .5, col = "black", xaxt ="n", yaxt = "n", xlab ="", ylab = "",xlim = xlimQ, ylim = ylimC)
 
   # # obs vs. predicted
   # plot(log10(data$C),log10(data[[model.name1]]), pch=19, cex = .5, col = "black", xaxt ="n", yaxt = "n", xlab ="", ylab = "",xlim = ylimC, ylim = ylimC)
@@ -28,8 +28,8 @@ plot_CQ_scatter_compare <- function(site.id,site.name, model.name1,model.name2,d
   # plot(log10(data$C),log10(data[[model.name2]]), pch=19, cex = .5, col = "#b2e2e2", xlab ="Observed log10(mg/L) ", ylab = "Estimated log10(mg/L)",xlim = ylimC, ylim = ylimC)
   #
   # abline(coef = c(0,1), lty =1, lwd = 2)
-  # legend("bottomleft", legend = c("Obs. C", model.name1, model.name2),
-         # col = c("darkgrey","#8856a7","#fc8d59"), pch = 19, cex = 1)
+  legend("bottomleft", legend = c("Obs. C", model.name1, model.name2),
+  col = c("darkgrey","black","#238b45"), pch = 19, cex = 1)
 
 
   # return(plot_CQ)

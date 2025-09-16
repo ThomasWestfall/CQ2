@@ -14,14 +14,14 @@ plot_CQ_scatter <- function(site.id,site.name, model.name1,data){
     mtext(paste(site.id," ",site.name,sep=""), side =3,cex = 1.2, padj = -.5)
 
     par(new = TRUE)
-    plot(log10(data$Q),log10(data[[model.name1]]), pch=19, cex = .5, col = "#8856a7", xaxt ="n", yaxt = "n", xlab ="", ylab = "",xlim = xlimQ, ylim = ylimC)
+    plot(log10(data$Q),log10(data[[model.name1]]), pch=19, cex = .5, col = "#238b45", xaxt ="n", yaxt = "n", xlab ="", ylab = "",xlim = xlimQ, ylim = ylimC)
 
     legend("bottomleft", legend = c("Obs. C", model.name1),
-           col = c("darkgrey","#8856a7"), pch = 19, cex = 1)
+           col = c("darkgrey","#238b45"), pch = 19, cex = 1)
 
 
     return(plot_CQ)
 
-    dev.off()
+    # dev.off()
 
   }
