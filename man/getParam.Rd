@@ -13,6 +13,8 @@ getParam(
 \arguments{
 \item{model.setup}{lists of details about data, model, and site from \code{setModels}}
 
+\item{Chat.model.name}{character string of one fitted model (i.e. "C13")}
+
 \item{output.data}{dataframe of daily concentration and baseflow predictions from \code{getResults}}
 }
 \value{

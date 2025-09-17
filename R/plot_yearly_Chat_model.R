@@ -1,7 +1,7 @@
 plot_yearly_Chat_model <- function(site.id,model.name1,data_all){
 
-  op <- par(no.readonly = T)
-  on.exit(par(op))
+  # op <- par(no.readonly = T)
+  # on.exit(par(op))
 
   #unique years & drought index
   uniqueyears <- unique(data_all$year)
@@ -61,18 +61,18 @@ plot_yearly_Chat_model <- function(site.id,model.name1,data_all){
     par(new=TRUE)
     pframe <- data.frame(datetime,data[[model.name1]])
     pframe <- pad(pframe,interval = "day")
-    plot(pframe, type="l", lty = 1,col="#8856a7", axes = FALSE, ylim = ylim.C, xlim=xlim.date, ylab="", xlab="", lwd=2)
+    plot(pframe, type="l", lty = 1,col="black", axes = FALSE, ylim = ylim.C, xlim=xlim.date, ylab="", xlab="", lwd=2)
     # mtext(paste(model.name1, side =3,cex = 1.5, padj = -2.5))
 
     if(model.name1 %in% c("C3","C4","C5","C6","C7","C8","C9","C10","C11","C13","C15")){
 
       legend(x = "top", y = par("usr")[4] - 0.1, legend = c("Obs. C",model.name1,"Q",paste("Q",sub('.','', model.name1),sep="")),
-           col = c("darkgray","#8856a7","#0072B4","#9ecae1"),lty = c(1,1,1,1),lwd=1, pt.cex = 0.1, pch = 16,cex = 1,
+           col = c("darkgray","black","#0072B4","#9ecae1"),lty = c(1,1,1,1),lwd=1, pt.cex = 0.1, pch = 16,cex = 1,
            ncol=4, inset=c(0, -.1), xpd=TRUE)
     }else{
 
       legend(x = "top", y = par("usr")[4] - 0.1, legend = c("Obs. C",model.name1,"Q"),
-             col = c("darkgray","#8856a7","#0072B4"),lty = c(1,1,1),lwd=1, pt.cex = 0.1, pch = 16,cex = 1,
+             col = c("darkgray","black","#0072B4"),lty = c(1,1,1),lwd=1, pt.cex = 0.1, pch = 16,cex = 1,
              ncol=3, inset=c(0, -.1), xpd=TRUE)
 
     }

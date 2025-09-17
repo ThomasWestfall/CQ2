@@ -4,11 +4,10 @@ plot_yearly_Chat_model_compare <- function(site.id,model.name1, model.name2,data
   uniqueyears <-unique(data_all$year)
 
   #open pdf printer and create plots
-  # pdf(paste(site.id,"_",model.name1,"_vs_",model.name2,"_yearly.pdf",sep=""), width = 11, height = 8)
+  pdf(paste(site.id,"_",model.name1,"_vs_",model.name2,"_yearly.pdf",sep=""), width = 11, height = 8)
     par(mar = c(6, 7,8, 8)) #margin
   #1 plot on each page
-  # layout_mat <- matrix(c(1,2), nrow = 2, ncol = 1,byrow = TRUE)
-  # my_lay <- layout(mat = layout_mat, heights = c(4,4),widths = c(5,5), respect =TRUE)
+
 
   for(p in 1:length(uniqueyears)){
     data <- data_all[data_all$year == uniqueyears[p], ]
@@ -55,11 +54,11 @@ plot_yearly_Chat_model_compare <- function(site.id,model.name1, model.name2,data
     axis(side = 4, cex.axis = 1, las=1, labels=TRUE)
 
     # # plot model one
-    # par(new=TRUE)
-    # pframe <- data.frame(datetime,data[[model.name1]])
-    # pframe <- pad(pframe,interval = "day")
-    # plot(pframe, type="l", lty = 2, col="black", axes = FALSE, ylim = ylim.C, xlim=xlim.date, ylab="", xlab="", lwd=1)
-    # # mtext(paste(model.name1, side =3,cex = 1.5, padj = -2.5))
+    par(new=TRUE)
+    pframe <- data.frame(datetime,data[[model.name1]])
+    pframe <- pad(pframe,interval = "day")
+    plot(pframe, type="l", lty = 2, col="black", axes = FALSE, ylim = ylim.C, xlim=xlim.date, ylab="", xlab="", lwd=1)
+    # mtext(paste(model.name1, side =3,cex = 1.5, padj = -2.5))
 
 
     # plot model two
@@ -81,13 +80,13 @@ plot_yearly_Chat_model_compare <- function(site.id,model.name1, model.name2,data
 
 
 
-    # Get input grapics settings
-    op <- par(no.readonly = T)
-    # reset graphics
-    par(op)
+    # # Get input grapics settings
+    # op <- par(no.readonly = T)
+    # # reset graphics
+    # par(op)
 
   }
-  # dev.off()
+  dev.off()
 
   return(output.plot)
 }

@@ -10,8 +10,11 @@ Below is an example for building, fitting, and evaluating the simple C-Q model (
 This _CQ2_ example sets-up and calibrates two models, then plots their results.
 
 ```r
-# Install and load the CQ2 package
+# Install and load the CQ2 package 
 devtools::install_github("ThomasWestfall/CQ2")
+# or (to avoid upgrading dependencies)
+devtools::install_github("ThomasWestfall/CQ2", upgrade = "never")
+
 library(CQ2)
 ```
 
@@ -57,7 +60,7 @@ models = setModels(Chat.model.names = c('C1','C13'),
 ## Fit models
 Calibrate the set-up models using `runModels` as shown below. This calibration optimizes parameters using a global search algorithm within the [cmaesr](https://github.com/jakobbossek/cmaesr) R-package. The fit takes several minutes to several hours depending on the model and amount of data. It takes 1.5 hours for model _C13_ to calibrate to 30 years of daily data. Every iteration is printed to the console where _y_ is the value of the negative log-likelihood that is being minimized in the objective function. After fitting the models, `getResults` re-runs the model with the best set of parameters in order to output predictions. 
 ```r 
-# Fit models
+# Fit models (may take hours to calibrate)
 models = runModels(model.setup = models)
 
 #> Starting optimization.
@@ -94,9 +97,9 @@ output.plots = plotResults(model.setup = models,
 # plot C-Q timeseries from two models
 
 # Set working directory to output PDF plot with timeseries
-setwd("C:/Users/twes0006/OneDrive - Monash University/Git/CQ2/data")
+# setwd("C:/Users/twes0006/OneDrive - Monash University/Git/CQ2/data")
 
-# plot timeseries
+# plot timeseries in a pdf file
 output.plots = plotResults(model.setup = models,
                           output.data = model.output,
                           plot.models = c('C1','C13'),
@@ -126,5 +129,10 @@ Select one of the fitted models to export the parameters.
 parameter_summary = getParam(model.setup = models,
                             Chat.model.name = "C13",
                              output.data = model.output)
+head(parameter_summary)
+#>     Site Model Estimate       A        B         yq       C0       Cs           Cq         V0      sigma
+#>1 234201B   C13      est 0.9636342 0.142892 0.01635686 5323.416 582.2036 2.605388e-05 0.004114567 0.2414188
+ 
+                            
 
 ```

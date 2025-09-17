@@ -439,42 +439,44 @@ getParam <- function(model.setup = list(),
     # names(para.list[[k]]) <- names(model.setup$model.output[k])
 
     para.summary <- matrix(NA,nrow = 1,ncol = length(model.setup$model.output[[Chat.model.name]]$best.param)+3)
+    para.summary = as.data.frame(para.summary)
     para.summary[1,1] <- site.id
     para.summary[1,2] <- Chat.model.name
     # para.summary[1,3] <- "upper"
     para.summary[1,3] <- "est"
     # para.summary[3,3] <- "lower"
-    names(para.summary)[1:3] <- c("Site","Model","Estimate")
+    colnames(para.summary)[1:3] <- c("Site","Model","Estimate")
 
     # para.summary[1,4:(length(cmaes.results[[k]]$best.param)+3)] <- boundsList[[noquote(Chat.model.names)]]$upper - cmaes.results[[k]]$best.param
     para.summary[1,4:(length(model.setup$model.output[[Chat.model.name]]$best.param)+3)] <- model.setup$model.output[[Chat.model.name]]$best.param
     # para.summary[3,4:(length(cmaes.results[[k]]$best.param)+3)] <- cmaes.results[[k]]$best.param - boundsList[[noquote(Chat.model.names)]]$lower
 
     if(Chat.model.name == "C13"){
-      names(para.summary)[4:length(para.summary)] <- c("A","B","yq","C0","Cs","Cq","V0","sigma")
-      para.summary[1,4] = para.summary[1,4]/10
-      para.summary[1,5] = para.summary[1,5]/10
-      para.summary[1,6] = log10(para.summary[1,6])
-      para.summary[1,7] = log10(para.summary[1,7])/log10(para.summary[1,10])
-      para.summary[1,8] = log10(para.summary[1,8])
-      para.summary[1,9] = log10(para.summary[1,9])/log10(para.summary[1,6])
-      para.summary[1,10] = log10(para.summary[1,10])
-      para.summary[1,11] = para.summary[1,11]/10
+      para.summary[1,4] = as.numeric(para.summary[1,4])/10
+      para.summary[1,5] = as.numeric(para.summary[1,5])/10
+      para.summary[1,6] = 10^(as.numeric(para.summary[1,6]))
+      para.summary[1,7] = 10^(as.numeric(para.summary[1,7]))/10^(as.numeric(para.summary[1,10]))
+      para.summary[1,8] = 10^(as.numeric(para.summary[1,8]))
+      para.summary[1,9] = 10^(as.numeric(para.summary[1,9]))/10^(as.numeric(para.summary[1,6]))
+      para.summary[1,10] = 10^(as.numeric(para.summary[1,10]))
+      para.summary[1,11] = as.numeric(para.summary[1,11])/10
+      colnames(para.summary)[4:length(para.summary)] <- c("A","B","yq","C0","Cs","Cq","V0","sigma")
+
 
 
     }
 
     if(Chat.model.name == "C1"){
       names(para.summary)[4:length(para.summary)] <- c("a","b","sigma")
-      para.summary[1,4] = log10(para.summary[1,4])
-      para.summary[1,5] = para.summary[1,5]
-      para.summary[1,6] = (para.summary[1,6])/10
+      para.summary[1,4] = 10^(as.numeric(para.summary[1,4]))
+      para.summary[1,5] = as.numeric(para.summary[1,5])
+      para.summary[1,6] = as.numeric(para.summary[1,6])/10
 
     }
 
   # }
 
-  return(as.data.frame(para.summary))
+  return(para.summary)
 
 }
 
